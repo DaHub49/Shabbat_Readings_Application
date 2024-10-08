@@ -36,6 +36,10 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
      * Current update date: 08 October, 2024
      */
 
+   /**
+     * changes 08/10 07:56
+     */
+
     private lateinit var recyclerView: RecyclerView;
     private lateinit var adapter: ShabbatReadingAdapter
     //val list1 = ArrayList<String>() // Creates an empty ArrayList of type String
