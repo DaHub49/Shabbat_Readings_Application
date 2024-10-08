@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadingsapplication.R
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
+import za.co.howtogeek.shabbatreadingsapplication.fragments.ShabbatDetailFragment
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -157,10 +158,27 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
     }
 
     override fun onItemClick(position: Int) {
+
+        // Create a new instance of your fragment and pass the position
+        //val shabbatDetailFragment = ShabbatDetailFragment.newInstance("Custom Name", position)
+
+        //Use Navigation to navigate??
+        //findNavController().navigate(R.id.readings_fragment_to_shabbat_detail_fragment)
+
+        /* Example: Navigate to the fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+         */
+
         // Handle item click and use the position
         val clickedItem = parashaNames[position]
         Toast.makeText(context, "Clicked: ${clickedItem.get(position)}", Toast.LENGTH_SHORT).show()
         // You can also pass this position to another activity or fragment if needed
+
+        val shabbatDetailFragment = ShabbatDetailFragment.newInstance(parashaNames[position], position)
+        findNavController().navigate(R.id.action_ReadingListFragment_to_ShabbatDetailFragment)
 
     }
 
