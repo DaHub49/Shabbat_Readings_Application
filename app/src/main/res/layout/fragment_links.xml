@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCCCCD">
+    <!--tools:context=".Fragments.LinksFragment">-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linksListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#CCCCCD"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/andrewHodkinsonYoutube"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:background="@drawable/button_solid"
+                android:textColor="?attr/colorButtonNormal"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:text="@string/andrew_hodkinson_youtube"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/bethTikkunAudio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_solid"
+                android:textColor="?attr/colorButtonNormal"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/beth_tikkun_audio_links"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/bethTikkunYoutube"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/beth_tikkun_youtube"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/theCreationGospel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/the_creation_gospel"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/hollisaAlewine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/hollisa_alewine_youtube"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/ffoz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/ffoz"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/ffozYoutube"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/ffoz_youtube"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/firm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/firm"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/firmYoutube"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/firm_youtube"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/grantLutonYoutube"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/grant_luton_youtube"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/torahTodayMinistries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:padding="15dp"
+                android:text="@string/torah_today_ministries"
+                android:textColor="?attr/colorButtonNormal"
+                android:background="@drawable/button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

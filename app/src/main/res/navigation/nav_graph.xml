@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment_dest">
+
+    <fragment
+        android:id="@+id/HomeFragment_dest"
+        android:name="za.co.howtogeek.shabbatreadingsapplication.fragments.HomeFragment"
+        android:label="@string/full_app_name"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_ReadingListFragment"
+            app:destination="@id/ReadingList_Fragment_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ReadingList_Fragment_dest"
+        android:name="za.co.howtogeek.shabbatreadingsapplication.readings5784.ReadingList_Fragment"
+        android:label="@string/title_activity_ffoz"
+        tools:layout="@layout/fragment_additional_readings">
+
+        <action
+            android:id="@+id/action_ReadingListFragment_to_ShabbatDetailFragment"
+            app:destination="@id/ShabbatDetailFragment_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ShabbatDetailFragment_dest"
+        android:name="za.co.howtogeek.shabbatreadingsapplication.fragments.ShabbatDetailFragment"
+        android:label="Shabbat Detailed View"
+        tools:layout="@layout/fragment_shabbat_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+
+        <action
+            android:id="@+id/action_ShabbatDetailFragment_to_ReadingList_Fragment"
+            app:destination="@id/ReadingList_Fragment_dest" />
+    </fragment>
+</navigation>
