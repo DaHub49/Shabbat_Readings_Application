@@ -34,6 +34,8 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
      * '0' for additional readings, and '1' for First Fruits of Zion.
      *+
      * Current update date: 08 October, 2024
+     *
+     * 08/10/24 13:21: Testing GitHub works correctly?
      */
 
    /**
