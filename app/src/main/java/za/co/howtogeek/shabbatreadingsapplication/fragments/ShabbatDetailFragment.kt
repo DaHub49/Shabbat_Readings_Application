@@ -2,6 +2,7 @@ package za.co.howtogeek.shabbatreadingsapplication.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.AssetManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import za.co.howtogeek.shabbatreadingsapplication.R
 import za.co.howtogeek.shabbatreadingsapplication.objects.ShabbatReading
 import java.io.BufferedReader
+import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 
@@ -29,7 +31,9 @@ import java.io.InputStreamReader
  */
 class ShabbatDetailFragment : Fragment() {
 
-    private val TAG = "za.co.howtogeek.shabbatreadingsapplication.fragments -> "
+    private val TAG = "fragments -> ShabbatDetailFragment ->"
+
+    private val FILENAME = "ffoz_bamidbar_5784.txt"
 
     private var fullMySwordReadings: String? = null
     private var fullYouVersionReadings: String? =
@@ -77,8 +81,9 @@ class ShabbatDetailFragment : Fragment() {
     private var mNewShabbatReading: ShabbatReading? = null
     private var selectedBibleTranslation = 0
 
-    private var parashaPosition = 0
-    private var parashaName = "Parasha"
+    private var parashaLine: String? = null
+    private var parashaPosition: Int = 0
+    private var parashaName = "[Parasha Name]"
 
     private val selectedFragment: String? = null
 
@@ -94,37 +99,116 @@ class ShabbatDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            parashaName = arguments?.getString("parashaName").toString()
-            Log.i(TAG, "ShabbatDetailFragment -> onCreate -> parashaName: " + parashaName)
             parashaPosition = arguments?.getInt("parashaPosition")!!
-            Log.i(TAG, "ShabbatDetailFragment -> onCreate -> parashaPosition: " + parashaPosition)
-        }
-        val context = requireContext()
+            Log.i(TAG, "ShabbatDetailFragment -> onCreate[step 1] -> parashaPosition: " + parashaPosition)
 
-        mPreferences = context.getSharedPreferences("", Context.MODE_PRIVATE)
-        //selectedBibleTranslation = arguments?.getInt("bibleTranslationInt")!!
-        //loadFromSharedPreferences()
+            parashaName = ""
+            importFFOZFile()
+        }
     }
 
-    /*private fun loadFromSharedPreferences() {
-        if(mPreferences != null) {
-            mPreferences = requireContext().getSharedPreferences(
-                "BibleTranslationPreferences",
-                Context.MODE_PRIVATE
-            )
-            parshaPosition = mPreferences.getInt("parshaPosition", 0)
-            val editor: SharedPreferences.Editor = mPreferences.edit()
-            editor.putString("fragment", "ShabbatDetailFragment")
-            editor.apply()
-        }
-
-     */
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        Log.i(TAG, "onCreateView[Step 2]: called")
+        return inflater.inflate(R.layout.fragment_shabbat_detail, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.i(TAG, "onViewCreated[Step 3]: -> CALLED!")
+
+        /**
+         * private var parashaLine: String? = null
+         *private var parashaPosition: Int = 0
+         *private var parashaName = "[Parasha Name]"
+         *
+         * "Bamidbar, [0]
+         * 8 Jun. 2024, [1]
+         * 2 Sivan, [2]
+         * Num. 1:1–4:20, [3]
+         * HOS. 2:1–22(1:10–2:20), [4]
+         * Mt. 4:1–17, [5]
+         * Num.1.1–4.20#Hos.2.1–22#Mat.4.1–17, [6]
+         * Num_1_1–4_20#Hos_2_1–22#Mat_4_1–17" [7]
+         *
+         * Error possibly lies in one of these:
+         *
+         * Beha’alotcha[0],
+         * 22 Jun. 2024[1],
+         * 16 Sivan[2],
+         * Num. 8:1–12:16[3],
+         * Zec. 2:14(10)–4:7*[4],
+         * Mt. 14:14–21[5],
+         * Num.8.1–12.16#Zec.2.14–4.7#Mat.14.14–21[6],
+         * Num_8_1–12_16#Zec_2_14–4_7#Mat_14_14–21[7]
+         *
+         * Shelach[0],
+         * 29 Jun. 2024[1],
+         * 23 Sivan[2],
+         * Num. 13:1–15:41[3],
+         * Josh. 2:1–24[4],
+         * Mt. 10:1–14[5],
+         * Num.13.1–15.41#Jos.2.1–24#Mat.10.1–14[6],
+         * Num_13_1–15_41#Jos_2_1–24#Mat_10_1–14[7]
+         *
+         * Korach,6 Jul. 2024,30 Sivan,Num. 16:1–18:32,Isa. 66:1–24,MK. 9:40–50,Num.16.1–18.32#Isa.66.1–24#Mar.9.40–50,Num_16_1–18_32#Isa_66_1–24#Mat_9_40–50
+         *
+         * Korach[0],
+         * 6 Jul. 2024[1],
+         * 30 Sivan[2],
+         * Num. 16:1–18:32[3],
+         * Isa. 66:1–24[4],
+         * MK. 9:40–50[5],
+         * Num.16.1–18.32#Isa.66.1–24#Mar.9.40–50[6],
+         * Num_16_1–18_32#Isa_66_1–24#Mat_9_40–50[7]
+         *
+         *  parashaElements[0] | Korach
+         *  parashaElements[1] | 6 Jul. 2024
+         *  parashaElements[2] | 30 Sivan
+         *  parashaElements[3] | Num. 16:1–18:32
+         *  parashaElements[4] | Isa. 66:1–24
+         *  parashaElements[5] | MK. 9:40–50
+         *  parashaElements[6] | Num.16.1–18.32#Isa.66.1–24#Mar.9.40–50
+         *  parashaElements[7] | Num_16_1–18_32#Isa_66_1–24#Mat_9_40–50
+         *
+         * Chukat[0],
+         * 13 Jul. 2024[1],
+         * 7 Tammuz[2],
+         * Num. 19:1–22:1[3],
+         * Jdg. 11:1–33[4],
+         * Jn. 2:1–12[5],
+         * Num.19.1–22.1#Jdg.11.1–33#Joh.2.1–12[6],
+         * Num_19_1–22_1#Jdg_11_1–33#Joh_2_1–12[7]
+         *
+         * Balak[0],
+         * 20 Jul. 2024[1],
+         * 14 Tammuz[2],
+         * Num. 22:2–25:9[3],
+         * Mic. 5:6(7)–6:8[4],
+         * Mt. 21:1–11[5],
+         * Num.22.2–25.9#Mic.5.6–6.8#Mat.21.1–11[6],
+         * Num_22_2–25_9#Mic_5_6–6_8#Mat_21_1–11[7]
+         * Pinchas,27 Jul. 2024,21 Tammuz,Num. 25:10–30:1(29:40),Jer. 1:1–2:3,Jn. 2:13–22,Num.25.10–30.1#Jer.1.1–2.3#Joh.2.13–22,Num_25_10–30_1#Jer_1_1–2_3#Joh_2_13–22
+         */
+
+        val parashaElements = parashaLine!!.split(",")
+        parashaName = parashaElements.get(0)
+
+        Log.i(TAG, "onViewCreated: parashaElements.get(0): ${parashaElements.get(0)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(1): ${parashaElements.get(1)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(2): ${parashaElements.get(2)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(3): ${parashaElements.get(3)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(4): ${parashaElements.get(4)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(5): ${parashaElements.get(5)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(6): ${parashaElements.get(6)}")
+        Log.i(TAG, "onViewCreated: parashaElements.get(7): ${parashaElements.get(7)}")
 
         val shabbat_title_text = view.findViewById<TextView>(R.id.shabbat_title_text)
         shabbat_title_text.setText(parashaName)
+
 
 
     }
@@ -182,115 +266,45 @@ class ShabbatDetailFragment : Fragment() {
     } //loadFromSharedPreferences
 
     private fun importFFOZFile() {
-        var reader: BufferedReader? = null
+        //var reader: BufferedReader? = null
+        Log.i(TAG, "importFFOZFile: -> CALLED!")
 
-        //mNewShabbatReading = ShabbatReading()
+        loadFileContent()
 
-        try {
-            reader =
-                BufferedReader(InputStreamReader(requireActivity().assets.open("ffoz_bamidbar_5784.txt")))
-
-            //Bamidbar[0],
-            //8 Jun. 2024[1],
-            // 2 Sivan[2],
-            // Num. 1:1–4:20[3],
-            // HOS. 2:1–22(1:10–2:20)[4],
-            // Mt. 4:1–17[5],
-            // Num.1.1–4.20#Hos.2.1–22#Mat.4.1–17[6],
-            // Num_1_1–4_20#Hos_2_1–22#Mat_4_1–17[7]
-            //will cycle through each line of the text file and compare names until it finds the correct position:
-            var mLine = ""
-            //WORKING! SORT OUT ASSIGNMENT!
-            for (i in 0..parashaPosition) {
-                if (i == parashaPosition)
-                    mLine = reader.readLine()
-            }
-            val lineElements =
-                mLine.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-            /**
-             * ToDo Consider adding more elements to original array
-             */
-
-            //Bamidbar[0],
-            //8 Jun. 2024[1],
-            // 2 Sivan[2],
-            // Num. 1:1–4:20[3],
-            // HOS. 2:1–22(1:10–2:20)[4],
-            // Mt. 4:1–17[5],
-            // Num.1.1–4.20#Hos.2.1–22#Mat.4.1–17[6],
-            // Num_1_1–4_20#Hos_2_1–22#Mat_4_1–17[7]
-
-            var index: Int = 0
-            mNewShabbatReading = ShabbatReading(index, 0,
-                //1: parashaName:
-                lineElements[0],
-                //2: Gregorian Date:
-                lineElements[1],
-                //3: Hebrew Date:
-                lineElements[2],
-                //4: TorahPortion:
-                lineElements[3],
-                //5: haftarahPortion:
-                lineElements[4],
-                //6: gospelPortion:
-                lineElements[5],
-                //7: youVersion:
-                lineElements[6],
-                //6: mySword:
-                lineElements[7]
-            )
-            //start check with Haftarah Books 1st, then New Testament:
-
-            //now check for Ezekiel for YouVersion: (if contains("Eze") replace ("ezk)
-            fullYouVersionReadings = if (lineElements[6].contains("Eze")) {
-                lineElements[6].replace("Eze", "ezk")
-            } else lineElements[6]
-
-            //either way, at this point in time, fullYouVersionReadings will still be equal to lineElements[6], but with a replacement if necessary
-            //so use the placeholder in the next conditional statement if necessary:
-
-            //To make intent work correctly with the YouVersion Bible for the book of John:
-            if (fullYouVersionReadings!!.contains("Joh")) {
-                val phYouVersionReadings = fullYouVersionReadings
-                fullYouVersionReadings = phYouVersionReadings!!.replace("Joh", "Jhn")
-            } else if (fullYouVersionReadings!!.contains("Mar")) {
-                val phYouVersionReadings = fullYouVersionReadings
-                //Log.i(TAG, "ShabbatDetailFragment - before altered fullYouVersionReadings: " + fullYouVersionReadings);
-                //Log.i(TAG, "ShabbatDetailFragment - phYouVersionReadings: " + phYouVersionReadings);
-                fullYouVersionReadings = phYouVersionReadings!!.replace("Mar", "Mrk")
-                //Log.i(TAG, "ShabbatDetailFragment - altered fullYouVersionReadings: " + fullYouVersionReadings);
-            }
-
-            fullMySwordReadings = lineElements[7]
-            //assignYouVersionReadings()
-            //assignMySwordReadings()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-            }
-        }
     } //importFFOZFile()
 
+    fun readLinesFromAssets(context: Context?, fileName: String): List<String> {
+        return try {
+            val assetManager: AssetManager = requireContext().assets
+            val inputStream = assetManager.open(fileName)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            return reader.readLines().also { reader.close() } // Read all lines and close the reader
+        } catch (e: IOException) {
+            Log.e(TAG, "Error reading file from assets", e)
+            emptyList() // Return an empty list in case of an error
+        }
+    }
 
+    // Usage in an Activity or Fragment
+    fun loadFileContent() {
+        parashaLine = ""
+        val lines = readLinesFromAssets(context, FILENAME)
+        var indexInt = 0;
+        lines.forEach { line ->
+            println(line) // Print each line or handle as needed
+            if (indexInt == parashaPosition){
+                Log.i(TAG, "\nloadFileContent: indexInt ($indexInt) == parashaPosition ($parashaPosition)\n")
+                parashaLine = line
+            }
+            Log.i(TAG, "\nloadFileContent: parashaLine: $parashaLine")
+            indexInt++
+        }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shabbat_detail, container, false)
+        Log.i(TAG, "end of method -> loadFileContent -> parashaLine: $parashaLine")
     }
 
     companion object {
-        fun newInstance(parashaName: String, parashaPosition: Int): ShabbatDetailFragment {
+        /*fun newInstance(parashaName: String, parashaPosition: Int): ShabbatDetailFragment {
             val fragment = ShabbatDetailFragment()
             val args = Bundle()
             args.putString("parashaName", parashaName)
@@ -298,5 +312,6 @@ class ShabbatDetailFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+         */
     }
 }

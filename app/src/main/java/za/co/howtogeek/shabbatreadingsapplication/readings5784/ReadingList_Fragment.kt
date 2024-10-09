@@ -21,7 +21,7 @@ import java.io.InputStreamReader
 /**
  * Bamidbar_5782_Fragment- a centralised fragment that contains the both the First Fruits of Zion and Lion Lamb Ministries' reading plans based off the Book of Numbers (Bamidbar)
  */
-private val TAG = "za.co.howtogeek.shabbatreadingsapplication.readings5784 -> ReadingListFragment -> "
+private val TAG = "readings5784 -> ReadingListFragment -> "
 
 class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener {
     /**
@@ -34,13 +34,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
      * The app will know which reading set to load from the int argument that was passed with the creation of the new fragment.
      * '0' for additional readings, and '1' for First Fruits of Zion.
      *+
-     * Current update date: 08 October, 2024
-     *
-     * 08/10/24 13:21: Testing GitHub works correctly?
-     */
-
-   /**
-     * changes 08/10 07:56
+     * Current update date: 10 October, 2024
      */
 
     private lateinit var recyclerView: RecyclerView;
@@ -48,32 +42,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
     //val list1 = ArrayList<String>() // Creates an empty ArrayList of type String
     private var parashaNames = ArrayList<String>()
 
-    /*
-    override fun onItemClick(item: String) {
-        Log.i(TAG, "onItemClick: $item")
-
-        /* Item click listener
-        // ReadingList_Fragment.kt
-        val action = HomeFragmentDirections.actionHomeToDetails(itemId = 12345)
-        findNavController().navigate(action)
-         */
-
-
-        //val action = HomeFragmentDirections.action_readingList_Fragment_to_shabbat_detail_fragment(title = item)
-
-        //findNavController().navigate(R.id.action_ReadingListFragment_to_HomeFragment)
-        //findNavController().navigate(R.id.action_readingList_Fragment_to_shabbat_detail_fragment())
-    }
-     */
-
     private fun readFFOZFileSaveToArrayList(context: Context, filename: String) : ArrayList<String> {
-
-        //ChatGPT 18/07:
-        // Initialize an empty ArrayList to store lines
-        //val lines = ArrayList<String>()
-        // Read the file using Kotlin extension function readLines()
-        //File(filename).useLines { lines.addAll(it) }
-        //ChatGPT end
 
         Log.i(TAG, "readFFOZFileSaveToArrayList: [initiated]")
 
@@ -135,23 +104,12 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         //4. Set reading_list_fragment_title_text to corresponding readings:
         reading_list_fragment_title_text.setText(getString(R.string.first_fruit_of_zion))
 
-        //val shabbatReadingAdapter = ShabbatReadingAdapter {shabbatReading -> adapterOnClick(shabbatReading) }
-        //shabbatReadingAdapter.populateArrayList(parashaNames)
-        //val readingsAdapter = ShabbatReadingAdapter(shabbatReadingAdapterOnparashaNames)
-
         //4. Pass ArrayList to adapter:
         adapter = ShabbatReadingAdapter(
             parashaNames,
             this)
 
-        recyclerView.adapter = adapter /** MyAdapter(items) { item ->
-            // Handle item click and navigate
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item.id)
-            navController.navigate(action)
-            }
-            */
-
-
+        recyclerView.adapter = adapter
 
         return view
 
@@ -159,26 +117,11 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
 
     override fun onItemClick(position: Int) {
 
-        // Create a new instance of your fragment and pass the position
-        //val shabbatDetailFragment = ShabbatDetailFragment.newInstance("Custom Name", position)
+        val bundle = Bundle().apply {
+            putInt("parashaPosition", position)
+        }
 
-        //Use Navigation to navigate??
-        //findNavController().navigate(R.id.readings_fragment_to_shabbat_detail_fragment)
-
-        /* Example: Navigate to the fragment
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-         */
-
-        // Handle item click and use the position
-        val clickedItem = parashaNames[position]
-        Toast.makeText(context, "Clicked: ${clickedItem.get(position)}", Toast.LENGTH_SHORT).show()
-        // You can also pass this position to another activity or fragment if needed
-
-        val shabbatDetailFragment = ShabbatDetailFragment.newInstance(parashaNames[position], position)
-        findNavController().navigate(R.id.action_ReadingListFragment_to_ShabbatDetailFragment)
+        findNavController().navigate(R.id.action_ReadingListFragment_to_ShabbatDetailFragment, bundle)
 
     }
 
@@ -189,86 +132,4 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         Log.i(TAG, "onViewCreated: [called]")
     }
 
-    /*
-
-
-        // Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.
-
-        //CustomAdapter(private val context: Context, private val dataList: List<String>)
-        adapter = CustomAdapter(context, parashaNames)
-        recyclerView.adapter = adapter
-
-        adapter.setOnItemClickListener(object: ShabbatReadingAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int, text: String) {
-                Log.d("ShabbatReadingAdapter", "Selected item position: $position, Text: $text")
-            }
-        })
-
-        return view
-    }
-
-    //ChatGPT Step2 (see ShabbatReadingAdapter for all steps)
-    override fun onItemClick(position: Int) {
-        // Create a new instance of your fragment and pass the position
-        //val shabbatDetailFragment = ShabbatDetailFragment.newInstance("Custom Name", position)
-
-        //Use Navigation to navigate??
-        findNavController().navigate(R.id.readings_fragment_to_shabbat_detail_fragment)
-
-        /* Example: Navigate to the fragment
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-         */
-    }
-
-     */
-
-    /*
-    private fun importAdditionalReadings5784File() {
-
-        /*
-        val inputStream = context?.assets?.open("formatted_bamidbar_additional_parashat_readings.txt")
-        val size = inputStream?.available()
-        val buffer = size?.let { ByteArray(it) }
-        inputStream.read(buffer)
-        inputStream.close()
-        String(buffer, Charsets.UTF_8) // Convert the buffer to a string
-    } catch (e: IOException) {
-        e.printStackTrace()
-        "" // Return empty string on error
-    }
-
-    //To create a simplified list of just the names of the weekly portions:
-    parashaNames = ArrayList()
-
-    //do reading, usually loop until end of file read:
-    var mLine = ""
-    while ((reader.readLine().also { mLine = it }) != null) {
-        //Bamidbar,Isaiah 55-60,Job 29-34,Acts 1-2,James,Isa.55.1#Job.29.1#Act.1.1#Jam.1.1
-        // ,Isa_55_1#Job_29_1#Act_1_1#Jam_1_1
-
-        //break the line of the text file into an array and get the Parasha name to display:
-
-        val tempElements =
-            mLine.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        parashaNames.add(tempElements[0])
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-            }
-        } */
-    } //importExtendedReadings5784File
-
-     */
 }

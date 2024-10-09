@@ -3,8 +3,8 @@ package za.co.howtogeek.shabbatreadingsapplication.objects
 
 
 data class ShabbatReading(
-    val id: Int, //0
-    var readingSet: Int = 0, //1
+    val id: Int?, //0
+    var readingSet: Int? = 0, //1
     var parashaName: String? = null, //2
     var gregorianDate: String? = null, //3
     var hebrewDate: String? = null, //4
