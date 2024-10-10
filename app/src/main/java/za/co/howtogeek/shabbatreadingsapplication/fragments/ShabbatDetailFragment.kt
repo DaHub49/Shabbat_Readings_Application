@@ -121,81 +121,28 @@ class ShabbatDetailFragment : Fragment() {
         Log.i(TAG, "onViewCreated[Step 3]: -> CALLED!")
 
         /**
-         * private var parashaLine: String? = null
-         *private var parashaPosition: Int = 0
-         *private var parashaName = "[Parasha Name]"
          *
-         * "Bamidbar, [0]
-         * 8 Jun. 2024, [1]
-         * 2 Sivan, [2]
-         * Num. 1:1–4:20, [3]
-         * HOS. 2:1–22(1:10–2:20), [4]
-         * Mt. 4:1–17, [5]
-         * Num.1.1–4.20#Hos.2.1–22#Mat.4.1–17, [6]
-         * Num_1_1–4_20#Hos_2_1–22#Mat_4_1–17" [7]
-         *
-         * Error possibly lies in one of these:
-         *
-         * Beha’alotcha[0],
-         * 22 Jun. 2024[1],
-         * 16 Sivan[2],
-         * Num. 8:1–12:16[3],
-         * Zec. 2:14(10)–4:7*[4],
-         * Mt. 14:14–21[5],
-         * Num.8.1–12.16#Zec.2.14–4.7#Mat.14.14–21[6],
-         * Num_8_1–12_16#Zec_2_14–4_7#Mat_14_14–21[7]
-         *
-         * Shelach[0],
-         * 29 Jun. 2024[1],
-         * 23 Sivan[2],
-         * Num. 13:1–15:41[3],
-         * Josh. 2:1–24[4],
-         * Mt. 10:1–14[5],
-         * Num.13.1–15.41#Jos.2.1–24#Mat.10.1–14[6],
-         * Num_13_1–15_41#Jos_2_1–24#Mat_10_1–14[7]
-         *
-         * Korach,6 Jul. 2024,30 Sivan,Num. 16:1–18:32,Isa. 66:1–24,MK. 9:40–50,Num.16.1–18.32#Isa.66.1–24#Mar.9.40–50,Num_16_1–18_32#Isa_66_1–24#Mat_9_40–50
-         *
-         * Korach[0],
-         * 6 Jul. 2024[1],
-         * 30 Sivan[2],
-         * Num. 16:1–18:32[3],
-         * Isa. 66:1–24[4],
-         * MK. 9:40–50[5],
-         * Num.16.1–18.32#Isa.66.1–24#Mar.9.40–50[6],
-         * Num_16_1–18_32#Isa_66_1–24#Mat_9_40–50[7]
-         *
-         *  parashaElements[0] | Korach
-         *  parashaElements[1] | 6 Jul. 2024
-         *  parashaElements[2] | 30 Sivan
-         *  parashaElements[3] | Num. 16:1–18:32
-         *  parashaElements[4] | Isa. 66:1–24
-         *  parashaElements[5] | MK. 9:40–50
-         *  parashaElements[6] | Num.16.1–18.32#Isa.66.1–24#Mar.9.40–50
-         *  parashaElements[7] | Num_16_1–18_32#Isa_66_1–24#Mat_9_40–50
-         *
-         * Chukat[0],
-         * 13 Jul. 2024[1],
-         * 7 Tammuz[2],
-         * Num. 19:1–22:1[3],
-         * Jdg. 11:1–33[4],
-         * Jn. 2:1–12[5],
-         * Num.19.1–22.1#Jdg.11.1–33#Joh.2.1–12[6],
-         * Num_19_1–22_1#Jdg_11_1–33#Joh_2_1–12[7]
-         *
-         * Balak[0],
-         * 20 Jul. 2024[1],
-         * 14 Tammuz[2],
-         * Num. 22:2–25:9[3],
-         * Mic. 5:6(7)–6:8[4],
-         * Mt. 21:1–11[5],
-         * Num.22.2–25.9#Mic.5.6–6.8#Mat.21.1–11[6],
-         * Num_22_2–25_9#Mic_5_6–6_8#Mat_21_1–11[7]
-         * Pinchas,27 Jul. 2024,21 Tammuz,Num. 25:10–30:1(29:40),Jer. 1:1–2:3,Jn. 2:13–22,Num.25.10–30.1#Jer.1.1–2.3#Joh.2.13–22,Num_25_10–30_1#Jer_1_1–2_3#Joh_2_13–22
+         *     private var mySwordTorahReadings = ""
+         *     private var mySwordHaftarahReadings = ""
+         *     private var mySwordGospelReadings = ""
+         *     private var youVersionTorahURL: String? = null
+         *     private var youVersionHaftarahURL: String? = null
+         *     private var youVersionNTURL: String? = null
          */
-
         val parashaElements = parashaLine!!.split(",")
         parashaName = parashaElements.get(0)
+        mNewShabbatReading = ShabbatReading(
+            id = parashaPosition,
+            readingSet = 0,
+            parashaName = parashaElements.get(0),
+            gregorianDate = parashaElements.get(1),
+            hebrewDate = parashaElements.get(2),
+            torahPortion = parashaElements.get(3),
+            haftarahPortion = parashaElements.get(4),
+            gospelPortion = parashaElements.get(5),
+            youVersion = parashaElements.get(6),
+            mySword = parashaElements.get(7)
+        )
 
         Log.i(TAG, "onViewCreated: parashaElements.get(0): ${parashaElements.get(0)}")
         Log.i(TAG, "onViewCreated: parashaElements.get(1): ${parashaElements.get(1)}")
@@ -207,7 +154,25 @@ class ShabbatDetailFragment : Fragment() {
         Log.i(TAG, "onViewCreated: parashaElements.get(7): ${parashaElements.get(7)}")
 
         val shabbat_title_text = view.findViewById<TextView>(R.id.shabbat_title_text)
-        shabbat_title_text.setText(parashaName)
+        shabbat_title_text.setText(mNewShabbatReading!!.parashaName)
+
+        val gregorianDateTextView = view.findViewById<TextView>(R.id.gregorianDateTextView)
+        gregorianDateTextView.setText(mNewShabbatReading!!.gregorianDate)
+
+        val biblicalDateTextView = view.findViewById<TextView>(R.id.biblicalDateTextView)
+        biblicalDateTextView.setText(mNewShabbatReading!!.hebrewDate)
+
+        val torahTextView = view.findViewById<TextView>(R.id.torahTextView)
+        torahTextView.setText(mNewShabbatReading!!.torahPortion)
+
+        val haftarahTextView = view.findViewById<TextView>(R.id.haftarahTextView)
+        haftarahTextView.setText(mNewShabbatReading!!.haftarahPortion)
+
+        val britChadashahTextView = view.findViewById<TextView>(R.id.britChadashahTextView)
+        britChadashahTextView.setText(mNewShabbatReading!!.gospelPortion)
+
+
+
 
 
 
