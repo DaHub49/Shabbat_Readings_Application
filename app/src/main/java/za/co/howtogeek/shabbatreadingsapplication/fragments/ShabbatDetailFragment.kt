@@ -1,13 +1,16 @@
 package za.co.howtogeek.shabbatreadingsapplication.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.AssetManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import za.co.howtogeek.shabbatreadingsapplication.R
@@ -87,7 +90,7 @@ class ShabbatDetailFragment : Fragment() {
 
     private val selectedFragment: String? = null
 
-    private var mPreferences: SharedPreferences? = null
+    //private var mPreferences: SharedPreferences? = null
 
     //booleans to check if RadioButtons are checked:
     var mySwordRadioButtonSelected: Boolean = false
@@ -162,8 +165,27 @@ class ShabbatDetailFragment : Fragment() {
         val biblicalDateTextView = view.findViewById<TextView>(R.id.biblicalDateTextView)
         biblicalDateTextView.setText(mNewShabbatReading!!.hebrewDate)
 
+        //RadioGroups and RadioButtons:
+        val mySwordRadioButton = view.findViewById<TextView>(R.id.mySwordRadioButton)
+        val youVersionRadioButton = view.findViewById<TextView>(R.id.youVersionRadioButton)
+        mySwordRadioButton.isEnabled = true
+
+        val bibleSelectionRadioGroup = view.findViewById<RadioGroup>(R.id.bibleSelectionRadioGroup)
+        bibleSelectionRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.mySwordRadioButton -> {
+                    mySwordRadioButtonSelected = true
+                    youVersionRadioButtonSelected = false
+                }
+            }
+        }
+
         val torahTextView = view.findViewById<TextView>(R.id.torahTextView)
-        torahTextView.setText(mNewShabbatReading!!.torahPortion)
+        //Receives the member variables and disables the buttons if the value is 'null'
+        val torahPortion: String = mNewShabbatReading!!.torahPortion.toString()
+        if (torahPortion.equals("null", ignoreCase = true)) {
+            torahTextView.isEnabled = false
+        } else torahTextView.text = torahPortion
 
         val haftarahTextView = view.findViewById<TextView>(R.id.haftarahTextView)
         haftarahTextView.setText(mNewShabbatReading!!.haftarahPortion)
@@ -171,6 +193,34 @@ class ShabbatDetailFragment : Fragment() {
         val britChadashahTextView = view.findViewById<TextView>(R.id.britChadashahTextView)
         britChadashahTextView.setText(mNewShabbatReading!!.gospelPortion)
 
+        torahTextView.isClickable = true
+        torahTextView.setOnClickListener {
+            if (youVersionRadioButtonSelected) {
+                try {
+                    val launchIntent = Intent(Intent.ACTION_VIEW)
+                    val tempYouVersionIntent =
+                        youVersionTranslationPreText + youVersionTorahURL + youVersionTranslationEndText
+                    launchIntent.setData(Uri.parse(tempYouVersionIntent))
+                    startActivity(launchIntent)
+                } catch (e: Exception) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setData(Uri.parse("market://details?id=com.sirma.mobile.bible.android"))
+                    startActivity(intent)
+                }
+            } else if (mySwordRadioButtonSelected) {
+                try {
+                    Log.i(TAG, "onViewCreated: mySword clicked!")
+                    val launchIntent = Intent(Intent.ACTION_VIEW)
+                    val tempMySwordIntent = mySwordPretext + mySwordTorahReadings
+                    launchIntent.setData(Uri.parse(tempMySwordIntent))
+                    startActivity(launchIntent)
+                } catch (e: Exception) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setData(Uri.parse("market://details?id=com.riversoft.android.mysword"))
+                    startActivity(intent)
+                }
+            }
+        } //torahTextView onClickListener
 
 
 

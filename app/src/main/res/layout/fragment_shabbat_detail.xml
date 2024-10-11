@@ -171,8 +171,8 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/bibleSelectionLinearLayout"
+    <RadioGroup
+        android:id="@+id/bibleSelectionRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
@@ -197,7 +197,7 @@
             android:layout_weight="1"
             android:padding="15dp"
             android:text="@string/youversion_bible" />
-    </LinearLayout>
+    </RadioGroup>
 
     <TextView
         android:id="@+id/bibleTranslationPreferences"
@@ -211,7 +211,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bibleSelectionLinearLayout" />
+        app:layout_constraintTop_toBottomOf="@id/bibleSelectionRadioGroup" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
