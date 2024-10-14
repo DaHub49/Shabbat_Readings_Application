@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.AssetManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils.split
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,13 +33,20 @@ import java.io.InputStreamReader
  * 3. NB (NOTE TO SELF): FILES ALSO NEED TO BE AMENDED HERE
  * 4. " " JUST REMEMBER TO FIND ALL OCCURRENCES OF OLD TEXT FILES AND THEN CHANGE TO NEW ONES
  */
+
+/**
+ * Links:
+ * 1. https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android
+ * 2. https://bible.com/bible/100/rom.12.1.NASB1995
+ * 3. https://bible.com/bible/3854/gen.1_1.1.CSEB24
+ */
 class ShabbatDetailFragment : Fragment() {
 
     private val TAG = "fragments -> ShabbatDetailFragment ->"
 
     private val FILENAME = "ffoz_bamidbar_5784.txt"
 
-    private var fullMySwordReadings: String? = null
+    private var fullMySwordReadings: String = "null"
     private var fullYouVersionReadings: String? =
         null //, fullEnglishYouVersionReadings, fullXhosaYouVersionReadings;
 
@@ -165,6 +173,11 @@ class ShabbatDetailFragment : Fragment() {
         val biblicalDateTextView = view.findViewById<TextView>(R.id.biblicalDateTextView)
         biblicalDateTextView.setText(mNewShabbatReading!!.hebrewDate)
 
+        //Assign readings:
+        assignMySwordReadings()
+
+        assignYouVersionReadings()
+
         //RadioGroups and RadioButtons:
         val mySwordRadioButton = view.findViewById<TextView>(R.id.mySwordRadioButton)
         val youVersionRadioButton = view.findViewById<TextView>(R.id.youVersionRadioButton)
@@ -176,6 +189,11 @@ class ShabbatDetailFragment : Fragment() {
                 R.id.mySwordRadioButton -> {
                     mySwordRadioButtonSelected = true
                     youVersionRadioButtonSelected = false
+                }
+
+                R.id.youVersionRadioButton -> {
+                    mySwordRadioButtonSelected = false
+                    youVersionRadioButtonSelected = true
                 }
             }
         }
@@ -199,12 +217,16 @@ class ShabbatDetailFragment : Fragment() {
                 try {
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
-                        youVersionTranslationPreText + youVersionTorahURL + youVersionTranslationEndText
+                        youVersionEnglishPreText + youVersionTorahURL + youVersionEnglishEndText
+                    Log.i(TAG, "onViewCreated -> torahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
                     launchIntent.setData(Uri.parse(tempYouVersionIntent))
                     startActivity(launchIntent)
                 } catch (e: Exception) {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    intent.setData(Uri.parse("market://details?id=com.sirma.mobile.bible.android"))
+                    //https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android
+                    //intent.setData(Uri.parse("market://details?id=com.sirma.mobile.bible.android"))
+                    Log.i(TAG, "onViewCreated: [ELSE]")
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android"))
                     startActivity(intent)
                 }
             } else if (mySwordRadioButtonSelected) {
@@ -222,16 +244,100 @@ class ShabbatDetailFragment : Fragment() {
             }
         } //torahTextView onClickListener
 
+        haftarahTextView.isClickable = true
+        haftarahTextView.setOnClickListener {
+            if (youVersionRadioButtonSelected) {
+                try {
+                    val launchIntent = Intent(Intent.ACTION_VIEW)
+                    val tempYouVersionIntent =
+                        youVersionEnglishPreText + youVersionHaftarahURL + youVersionEnglishEndText
+                    Log.i(TAG, "onViewCreated -> haftarahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
+                    launchIntent.setData(Uri.parse(tempYouVersionIntent))
+                    startActivity(launchIntent)
+                } catch (e: Exception) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    //https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android
+                    //intent.setData(Uri.parse("market://details?id=com.sirma.mobile.bible.android"))
+                    Log.i(TAG, "onViewCreated: [ELSE]")
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android"))
+                    startActivity(intent)
+                }
+            } else if (mySwordRadioButtonSelected) {
+                try {
+                    Log.i(TAG, "onViewCreated: mySword clicked!")
+                    val launchIntent = Intent(Intent.ACTION_VIEW)
+                    val tempMySwordIntent = mySwordPretext + mySwordHaftarahReadings
+                    launchIntent.setData(Uri.parse(tempMySwordIntent))
+                    startActivity(launchIntent)
+                } catch (e: Exception) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setData(Uri.parse("market://details?id=com.riversoft.android.mysword"))
+                    startActivity(intent)
+                }
+            }
+        } //haftarahTextView onClickListener
 
+        britChadashahTextView.isClickable = true
+        britChadashahTextView.setOnClickListener {
+            if (youVersionRadioButtonSelected) {
+                try {
+                    val launchIntent = Intent(Intent.ACTION_VIEW)
+                    val tempYouVersionIntent =
+                        youVersionEnglishPreText + youVersionNTURL + youVersionEnglishEndText
+                    Log.i(TAG, "onViewCreated -> britChadashahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
+                    launchIntent.setData(Uri.parse(tempYouVersionIntent))
+                    startActivity(launchIntent)
+                } catch (e: Exception) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    //https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android
+                    //intent.setData(Uri.parse("market://details?id=com.sirma.mobile.bible.android"))
+                    Log.i(TAG, "onViewCreated: [ELSE]")
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android"))
+                    startActivity(intent)
+                }
+            } else if (mySwordRadioButtonSelected) {
+                try {
+                    Log.i(TAG, "onViewCreated: mySword clicked!")
+                    val launchIntent = Intent(Intent.ACTION_VIEW)
+                    val tempMySwordIntent = mySwordPretext + mySwordGospelReadings
+                    launchIntent.setData(Uri.parse(tempMySwordIntent))
+                    startActivity(launchIntent)
+                } catch (e: Exception) {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setData(Uri.parse("market://details?id=com.riversoft.android.mysword"))
+                    startActivity(intent)
+                }
+            }
+        } //gospelTextView onClickListener
+    }
 
+    private fun assignYouVersionReadings() {
+        Log.i(TAG, "assignYouVersionReadings: [called]")
+        val youVersionElements =
+            mNewShabbatReading?.youVersion?.split("#")
+        youVersionTorahURL = youVersionElements?.get(0)?: "null"
+        Log.i(TAG, "assignYouVersionReadings -> youVersionTorahURL: $youVersionTorahURL")
+        youVersionHaftarahURL = youVersionElements?.get(1)?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordHaftarahReadings: $youVersionHaftarahURL")
+        youVersionNTURL = youVersionElements?.get(2)?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $youVersionNTURL")
+    }
 
-
+    private fun assignMySwordReadings() {
+        //fullMySwordReadings
+        //Log.i(TAG, "assignMySwordReadings -> [error here]");
+        Log.i(TAG, "assignMySwordReadings: mNewShabbatReading?.mySword?: $fullMySwordReadings")
+        val mySwordElements =
+            mNewShabbatReading?.mySword?.split("#")
+        mySwordTorahReadings = mySwordElements?.get(0)?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordTorahReadings: $mySwordTorahReadings")
+        mySwordHaftarahReadings = mySwordElements?.get(1)?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordHaftarahReadings: $mySwordHaftarahReadings")
+        mySwordGospelReadings = mySwordElements?.get(2)?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $mySwordGospelReadings")
     }
 
     private fun loadReading() {
-
-
-
         when (selectedBibleTranslation) {
             -1, 0 -> {
                 youVersionTranslationPreText = youVersionEnglishPreText
