@@ -12,6 +12,8 @@ import za.co.howtogeek.shabbatreadingsapplication.databinding.ActivityMainBindin
 
 /**
  * New Main project on the 15/10/2024 @06:02 "C:\Droid projects\Github\Shabbat Readings Application"
+ *
+ * Next task to do: Set up the Bible translation preference page.
  */
 
 class MainActivity : AppCompatActivity() {

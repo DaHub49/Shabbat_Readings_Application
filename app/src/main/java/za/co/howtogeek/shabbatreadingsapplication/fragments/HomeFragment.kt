@@ -72,7 +72,8 @@ class HomeFragment : Fragment() {
 
         youversion_bible_settings_explanation.setOnClickListener {
             // Handle button 1 click
-            Toast.makeText(activity, "youversion_bible_settings_explanation clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "youversion_bi0ble_settings_explanation clicked", Toast.LENGTH_SHORT).show()
+            //findNavController().navigate(R.id.action_homeFragment_to_settingsActivity)
         }
 
         mysword_bible_setup.setOnClickListener {

@@ -64,8 +64,8 @@
 </string>
     <string name="bible_choice_string">Please choose a Bible above</string>
     <string name="tablet_edition">tablet edition</string>
-    <!--  TODO: Remove or change this placeholder text  -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="bible_translation_selection">YouVersion Bible Translation</string>
     <string name="you_version_northern_sotho">Northern Sotho</string>
     <string name="you_version_tsonga">Tsonga</string>
@@ -74,6 +74,19 @@
     <string name="bible_choice">YouVersion Bible Translation</string>
     <string name="english">English</string>
     <string name="youversion_bible_translation">YouVersion Bible Translation</string>
+
+    <string-array name="bible_translation_names">
+        <item>KJV</item>
+        <item>NIV</item>
+        <item>ESV</item>
+    </string-array>
+
+    <string-array name="bible_translation_values">
+        <item>KJV</item>
+        <item>NIV</item>
+        <item>ESV</item>
+    </string-array>
+
     <string name="parsha_name_placeholder">[parsha name]</string>
     <string name="additional_readings_placeholder">Additional\nReadings</string>
     <string name="prophets_placeholder">Prophets</string>
@@ -83,4 +96,20 @@
     <string name="reading_set">reading set</string>
     <string name="reading_list_fragment_template">Reading List <Fragment></Fragment></string>
     <string name="first_fruit_of_zion">First Fruit of Zion</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

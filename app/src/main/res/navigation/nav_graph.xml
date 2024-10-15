@@ -39,5 +39,16 @@
         <action
             android:id="@+id/action_ShabbatDetailFragment_to_ReadingList_Fragment"
             app:destination="@id/ReadingList_Fragment_dest" />
+
+        <action
+            android:id="@+id/action_ShabbatDetailFragment_dest_to_SettingsActivity_dest"
+            app:destination="@id/SettingsActivity_dest" />
     </fragment>
+
+    <activity
+        android:id="@+id/SettingsActivity_dest"
+        android:name="za.co.howtogeek.shabbatreadingsapplication.SettingsActivity"
+        android:label="Settings"
+        tools:layout="@layout/settings_activity" />
+
 </navigation>

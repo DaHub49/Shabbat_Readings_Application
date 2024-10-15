@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import za.co.howtogeek.shabbatreadingsapplication.R
 import za.co.howtogeek.shabbatreadingsapplication.objects.ShabbatReading
 import java.io.BufferedReader
@@ -183,6 +184,10 @@ class ShabbatDetailFragment : Fragment() {
         val youVersionRadioButton = view.findViewById<TextView>(R.id.youVersionRadioButton)
         mySwordRadioButton.isEnabled = true
 
+        val bibleTranslationPreferences = view.findViewById<TextView>(R.id.bibleTranslationPreferences)
+        bibleTranslationPreferences.setOnClickListener {
+            findNavController().navigate(R.id.action_ShabbatDetailFragment_dest_to_SettingsActivity_dest)        }
+
         val bibleSelectionRadioGroup = view.findViewById<RadioGroup>(R.id.bibleSelectionRadioGroup)
         bibleSelectionRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -309,7 +314,8 @@ class ShabbatDetailFragment : Fragment() {
                 }
             }
         } //gospelTextView onClickListener
-    }
+
+    } //onViewCreated
 
     private fun assignYouVersionReadings() {
         Log.i(TAG, "assignYouVersionReadings: [called]")
