@@ -1,7 +1,6 @@
 package za.co.howtogeek.shabbatreadingsapplication
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,6 +9,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import za.co.howtogeek.shabbatreadingsapplication.databinding.ActivityMainBinding
+
+/**
+ * New Main project on the 15/10/2024 @06:02 "C:\Droid projects\Github\Shabbat Readings Application"
+ */
 
 class MainActivity : AppCompatActivity() {
 
