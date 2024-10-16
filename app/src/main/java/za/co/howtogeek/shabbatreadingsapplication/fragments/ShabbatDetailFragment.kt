@@ -15,6 +15,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import za.co.howtogeek.shabbatreadingsapplication.R
 import za.co.howtogeek.shabbatreadingsapplication.objects.ShabbatReading
 import java.io.BufferedReader
@@ -128,6 +129,14 @@ class ShabbatDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_shabbat_detail, container, false)
     }
 
+    fun onTranslationSelected(translation: String) {
+        // Save the selected translation to SharedPreferences or wherever you store settings
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        sharedPrefs.edit().putString("bible_translation", translation).apply()
+
+        // Update UI or perform any other actions based on the selection
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i(TAG, "onViewCreated[Step 3]: -> CALLED!")
@@ -179,14 +188,19 @@ class ShabbatDetailFragment : Fragment() {
 
         assignYouVersionReadings()
 
+        // YouVersion Bible selection button
+        val bibleTranslationPreferences = view.findViewById<TextView>(R.id.bibleTranslationPreferences)
+        bibleTranslationPreferences.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("parentClassId", 0)
+            }
+            findNavController().navigate(R.id.action_ShabbatDetailFragment_dest_to_SettingsActivity_dest, bundle)
+        }
+
         //RadioGroups and RadioButtons:
         val mySwordRadioButton = view.findViewById<TextView>(R.id.mySwordRadioButton)
         val youVersionRadioButton = view.findViewById<TextView>(R.id.youVersionRadioButton)
         mySwordRadioButton.isEnabled = true
-
-        val bibleTranslationPreferences = view.findViewById<TextView>(R.id.bibleTranslationPreferences)
-        bibleTranslationPreferences.setOnClickListener {
-            findNavController().navigate(R.id.action_ShabbatDetailFragment_dest_to_SettingsActivity_dest)        }
 
         val bibleSelectionRadioGroup = view.findViewById<RadioGroup>(R.id.bibleSelectionRadioGroup)
         bibleSelectionRadioGroup.setOnCheckedChangeListener { group, checkedId ->

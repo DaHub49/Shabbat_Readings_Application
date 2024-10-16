@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_ReadingListFragment_to_ShabbatDetailFragment"
             app:destination="@id/ShabbatDetailFragment_dest" />
+        <action
+            android:id="@+id/action_ReadingList_Fragment_dest_to_YouVersionTranslationFragment_dest"
+            app:destination="@id/YouVersionTranslationFragment_dest" />
     </fragment>
 
     <fragment
@@ -42,13 +45,24 @@
 
         <action
             android:id="@+id/action_ShabbatDetailFragment_dest_to_SettingsActivity_dest"
-            app:destination="@id/SettingsActivity_dest" />
+            app:destination="@id/YouVersionTranslationFragment_dest" />
     </fragment>
 
-    <activity
-        android:id="@+id/SettingsActivity_dest"
-        android:name="za.co.howtogeek.shabbatreadingsapplication.SettingsActivity"
-        android:label="Settings"
-        tools:layout="@layout/settings_activity" />
+    <fragment
+        android:id="@+id/YouVersionTranslationFragment_dest"
+        android:name="za.co.howtogeek.shabbatreadingsapplication.settings.YouVersionTranslationFragment"
+        android:label="You Version Translation Preferences"
+        tools:layout="@layout/fragment_you_version_translation">
+        <argument
+            android:name="parentClassId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_YouVersionTranslationFragment_dest_to_ShabbatDetailFragment_dest"
+            app:destination="@id/ShabbatDetailFragment_dest" />
+        <action
+            android:id="@+id/action_YouVersionTranslationFragment_dest_to_ReadingList_Fragment_dest"
+            app:destination="@id/ReadingList_Fragment_dest" />
+    </fragment>
 
 </navigation>
