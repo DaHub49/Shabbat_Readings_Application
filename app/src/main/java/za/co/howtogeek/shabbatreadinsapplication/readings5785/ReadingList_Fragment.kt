@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadingsapplication.AssetReader.FileReader
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
+import za.co.howtogeek.shabbatreadingsapplication.fragments.ShabbatDetailFragment
 import za.co.howtogeek.shabbatreadinsapplication.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -35,41 +37,6 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         // Header TextView
         val readingListFragmentTitleText: TextView = view.findViewById(R.id.reading_list_fragment_title_text)
         readingListFragmentTitleText.text = getString(R.string.first_fruit_of_zion)
-
-        /**
-         * 23/10 06:37:
-         *
-         * parashaNames = ArrayList<String>()
-         *         // Initialize parashaNames
-         *
-         *         var mLine: String?
-         *
-         *         try {
-         *             // Open the file from assets or external storage based on your requirement
-         *             val assetManager = context.assets
-         *             val inputStream = assetManager.open(filename)
-         *             val reader = BufferedReader(InputStreamReader(inputStream))
-         *
-         *             //new:
-         *             var index = 0;
-         *             while (reader.readLine().also { mLine = it } != null) {
-         *                 val tempElements = mLine!!.split(",")
-         *                 parashaNames.add(tempElements[0])
-         *                 Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
-         *                 index++
-         *             }
-         *             reader.close()
-         *         } catch (e: Exception) {
-         *             e.printStackTrace()
-         *         }
-         *
-         *         //Output arrayList
-         *         for (line in parashaNames) {
-         *             Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
-         *         }
-         */
-
-
 
         val context = requireContext()
 
@@ -122,6 +89,26 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         Log.i(TAG, "onItemClick: [called]")
         val parashaName = parashaNames[position]
         Log.i(TAG, "onItemClick -> parashaName: $parashaName")
+
+        /*val bibleSelectionFragment: SettingsFragment = SettingsFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, bibleSelectionFragment)
+                .addToBackStack(null).commit()
+             */
+
+        val shabbatDetailFragment: ShabbatDetailFragment = ShabbatDetailFragment()
+        val bundle = Bundle()
+        //Rather pass string:
+        //bundle.putString("parashaLine", parashaLine)
+
+        bundle.putInt("parashaPosition", position)
+        shabbatDetailFragment.arguments = bundle
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, shabbatDetailFragment)
+            .addToBackStack(null).commit()
+
         // Assuming you're using Safe Args for navigation
         //val action = ReadingListFragmentactionDirections.actionReadingListFragmentToShabbatDetailFragment(position)
         //findNavController().navigate(action)

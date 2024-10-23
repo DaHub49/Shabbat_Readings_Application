@@ -1,14 +1,19 @@
 package za.co.howtogeek.shabbatreadingsapplication.fragments
 
+import YouVersionTranslationFragment
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.AssetManager
+import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import za.co.howtogeek.shabbatreadingsapplication.objects.ShabbatReading
 import za.co.howtogeek.shabbatreadinsapplication.R
@@ -35,14 +40,13 @@ import java.io.InputStreamReader
  * 2. https://bible.com/bible/100/rom.12.1.NASB1995
  * 3. https://bible.com/bible/3854/gen.1_1.1.CSEB24
  */
-class ShabbatDetailFragment : Fragment() {
+private val TAG = "fragments -> ShabbatDetailFragment ->"
+private val FILENAME = "ffoz_berasheet_5785.txt"
 
-    private val TAG = "fragments -> ShabbatDetailFragment ->"
+class ShabbatDetailFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
     //private lateinit var editor: SharedPreferences.Editor
-
-    private val FILENAME = "ffoz_bamidbar_5784.txt"
 
     private var fullMySwordReadings: String = "null"
     private var fullYouVersionReadings: String? =
@@ -108,19 +112,85 @@ class ShabbatDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parashaName = ""
-        sharedPreferences = requireActivity().getSharedPreferences("BibleTranslationPreferences", Context.MODE_PRIVATE)
-        parashaPosition = sharedPreferences.getInt("parashaPosition", 0)
-        Log.i(TAG, "onCreate -> parashaPosition from SharedPreferences: $parashaPosition")
+        val context = requireContext()
 
         //importFFOZFile()
-        /*arguments?.let {
-            //parashaPosition = arguments?.getInt("parashaPosition")!!
-            //Log.i(TAG, "ShabbatDetailFragment -> onCreate[step 1] -> parashaPosition: " + parashaPosition)
+        arguments?.let {
+            parashaPosition = arguments?.getInt("parashaPosition")!!
+            Log.i(TAG, "onCreate -> parashaPosition after assignment from Bundle: " + parashaPosition)
 
             parashaName = ""
-            importFFOZFile()
+            parashaLine = importReading(FILENAME, parashaPosition)
+            Log.i(TAG, "onCreate: parashaLine: $parashaLine")
+
+            /*val context = requireContext() // Inside a Fragment
+            val line = readLineAtIndex(context, FILENAME, parashaPosition) // Read line at index 3
+
+            if (line != null) {
+                Log.i(TAG, "onCreate: line == null")
+            } else {
+                Log.i(TAG, "onCreate: line not found")
+            }
+
+             */
         }
-         */
+
+
+    }
+
+    fun readLineAtIndex(context: Context, filename: String, index: Int): String? {
+        var lineAtIndex: String? = null
+        try {
+            context.assets.open(filename).bufferedReader().useLines { lines ->
+                for ((currentIndex, line) in lines.withIndex()) {
+                    if (currentIndex == index) {
+                        lineAtIndex = line
+                        Log.i(TAG, "readLineAtIndex: lineAtIndex: $lineAtIndex")
+                        break
+                    }
+                }
+            }
+        } catch (e: IOException) {
+            Log.e("TAG", "Error reading file: ${e.message}", e)
+        }
+        return lineAtIndex
+    }
+
+    private fun importReading(filename: String, index: Int): String? {
+        var lineAtIndex: String? = null
+        try {
+            requireContext().assets.open(filename).bufferedReader().useLines { lines ->
+
+                /**
+                 * for (i in 1..3) {
+                 *     println(i)
+                 * }
+                 *
+                 * private var parashaLine: String? = null
+                 *     private var parashaPosition: Int = 0
+                 *     private var parashaName = "[Parasha Name]"
+                 */
+
+                /*for (i in lines) {
+                    if (i == parashaPosition) {
+                        println("Line at parashaPosition: $i")
+                        break // Exit the loop once the line is found
+                    }
+                }
+                 */
+
+                for (i in 0..index) {
+                    if (i == index) {
+                        lineAtIndex = lines.elementAt(i)
+                        Log.i(TAG, "importReading -> lineAtIndex: $lineAtIndex")
+                        break
+                    }
+                }
+            }
+        } catch (e: IOException) {
+            Log.e("TAG", "Error reading file: ${e.message}", e)
+        }
+        return lineAtIndex
     }
 
     override fun onCreateView(
@@ -137,25 +207,13 @@ class ShabbatDetailFragment : Fragment() {
         // Get the position (or other data) passed from ReadingList_Fragment
         //val position = arguments?.let { ShabbatDetailFragmentArgs.fromBundle(it).position }
 
-        fun onTranslationSelected(translation: String) {
-            // Save the selected translation to SharedPreferences or wherever you store settings
-            val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            sharedPrefs.edit().putString("bible_translation", translation).apply()
-
-            // Update UI or perform any other actions based on the selection
-        }
-
-        /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.i(TAG, "onViewCreated[Step 3]: -> CALLED!")
-
-
-         //    private var mySwordTorahReadings = ""
-         //    private var mySwordHaftarahReadings = ""
-         //     private var mySwordGospelReadings = ""
-         //    private var youVersionTorahURL: String? = null
-         //    private var youVersionHaftarahURL: String? = null
-         //     private var youVersionNTURL: String? = null
+        //    private var mySwordTorahReadings = ""
+        //    private var mySwordHaftarahReadings = ""
+        //     private var mySwordGospelReadings = ""
+        //    private var youVersionTorahURL: String? = null
+        //    private var youVersionHaftarahURL: String? = null
+        //     private var youVersionNTURL: String? = null
+        Log.i(TAG, "onViewCreated: parashaLine: $parashaLine")
         val parashaElements = parashaLine!!.split(",")
         parashaName = parashaElements.get(0)
         mNewShabbatReading = ShabbatReading(
@@ -195,15 +253,16 @@ class ShabbatDetailFragment : Fragment() {
         assignYouVersionReadings()
 
         // YouVersion Bible selection button
-        val bibleTranslationPreferences = view.findViewById<TextView>(R.id.bibleTranslationPreferences)
-        bibleTranslationPreferences.setOnClickListener {
-            /*
-            val bundle = Bundle().apply {
-                putInt("parentClassId", 0)
-            }
-            */
-            saveShabbatIdToSharedPreferences()
-            findNavController().navigate(R.id.action_ShabbatDetailFragment_dest_to_YouVersionTranslationFragment_dest)
+        val bibleTranslationPreferencesTextView = view.findViewById<TextView>(R.id.bibleTranslationPreferencesTextView)
+        bibleTranslationPreferencesTextView.setOnClickListener {
+            val youVersionTranslationFragment: YouVersionTranslationFragment = YouVersionTranslationFragment()
+            /*val bundle = Bundle()
+            bundle.putInt("parashaPosition", position)
+             */
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, youVersionTranslationFragment)
+                .addToBackStack(null).commit()
         }
 
         //RadioGroups and RadioButtons:
@@ -246,7 +305,10 @@ class ShabbatDetailFragment : Fragment() {
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
                         youVersionEnglishPreText + youVersionTorahURL + youVersionEnglishEndText
-                    Log.i(TAG, "onViewCreated -> torahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
+                    Log.i(
+                        TAG,
+                        "onViewCreated -> torahTextView -> tempYouVersionIntent: $tempYouVersionIntent"
+                    )
                     launchIntent.setData(Uri.parse(tempYouVersionIntent))
                     startActivity(launchIntent)
                 } catch (e: Exception) {
@@ -279,7 +341,10 @@ class ShabbatDetailFragment : Fragment() {
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
                         youVersionEnglishPreText + youVersionHaftarahURL + youVersionEnglishEndText
-                    Log.i(TAG, "onViewCreated -> haftarahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
+                    Log.i(
+                        TAG,
+                        "onViewCreated -> haftarahTextView -> tempYouVersionIntent: $tempYouVersionIntent"
+                    )
                     launchIntent.setData(Uri.parse(tempYouVersionIntent))
                     startActivity(launchIntent)
                 } catch (e: Exception) {
@@ -312,7 +377,10 @@ class ShabbatDetailFragment : Fragment() {
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
                         youVersionEnglishPreText + youVersionNTURL + youVersionEnglishEndText
-                    Log.i(TAG, "onViewCreated -> britChadashahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
+                    Log.i(
+                        TAG,
+                        "onViewCreated -> britChadashahTextView -> tempYouVersionIntent: $tempYouVersionIntent"
+                    )
                     launchIntent.setData(Uri.parse(tempYouVersionIntent))
                     startActivity(launchIntent)
                 } catch (e: Exception) {
@@ -340,118 +408,113 @@ class ShabbatDetailFragment : Fragment() {
 
     } //onViewCreated
 
-     */
+    fun assignYouVersionReadings() {
+        Log.i(TAG, "assignYouVersionReadings: [called]")
+        val youVersionElements =
+            mNewShabbatReading?.youVersion?.split("#")
+        youVersionTorahURL = youVersionElements?.get(0) ?: "null"
+        Log.i(TAG, "assignYouVersionReadings -> youVersionTorahURL: $youVersionTorahURL")
+        youVersionHaftarahURL = youVersionElements?.get(1) ?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordHaftarahReadings: $youVersionHaftarahURL")
+        youVersionNTURL = youVersionElements?.get(2) ?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $youVersionNTURL")
+    }
 
+    fun assignMySwordReadings() {
+        //fullMySwordReadings
+        //Log.i(TAG, "assignMySwordReadings -> [error here]");
+        Log.i(TAG, "assignMySwordReadings: mNewShabbatReading?.mySword?: $fullMySwordReadings")
+        val mySwordElements =
+            mNewShabbatReading?.mySword?.split("#")
+        mySwordTorahReadings = mySwordElements?.get(0) ?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordTorahReadings: $mySwordTorahReadings")
+        mySwordHaftarahReadings = mySwordElements?.get(1) ?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordHaftarahReadings: $mySwordHaftarahReadings")
+        mySwordGospelReadings = mySwordElements?.get(2) ?: "null"
+        Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $mySwordGospelReadings")
+    }
 
-
-        fun assignYouVersionReadings() {
-            Log.i(TAG, "assignYouVersionReadings: [called]")
-            val youVersionElements =
-                mNewShabbatReading?.youVersion?.split("#")
-            youVersionTorahURL = youVersionElements?.get(0) ?: "null"
-            Log.i(TAG, "assignYouVersionReadings -> youVersionTorahURL: $youVersionTorahURL")
-            youVersionHaftarahURL = youVersionElements?.get(1) ?: "null"
-            Log.i(TAG, "assignMySwordReadings -> mySwordHaftarahReadings: $youVersionHaftarahURL")
-            youVersionNTURL = youVersionElements?.get(2) ?: "null"
-            Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $youVersionNTURL")
-        }
-
-        fun assignMySwordReadings() {
-            //fullMySwordReadings
-            //Log.i(TAG, "assignMySwordReadings -> [error here]");
-            Log.i(TAG, "assignMySwordReadings: mNewShabbatReading?.mySword?: $fullMySwordReadings")
-            val mySwordElements =
-                mNewShabbatReading?.mySword?.split("#")
-            mySwordTorahReadings = mySwordElements?.get(0) ?: "null"
-            Log.i(TAG, "assignMySwordReadings -> mySwordTorahReadings: $mySwordTorahReadings")
-            mySwordHaftarahReadings = mySwordElements?.get(1) ?: "null"
-            Log.i(TAG, "assignMySwordReadings -> mySwordHaftarahReadings: $mySwordHaftarahReadings")
-            mySwordGospelReadings = mySwordElements?.get(2) ?: "null"
-            Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $mySwordGospelReadings")
-        }
-
-        fun loadReading() {
-            when (selectedBibleTranslation) {
-                -1, 0 -> {
-                    youVersionTranslationPreText = youVersionEnglishPreText
-                    youVersionTranslationEndText = youVersionEnglishEndText
-                }
-
-                1 -> {
-                    youVersionTranslationPreText = youVersionXhosaPreText
-                    youVersionTranslationEndText = youVersionXhosaEndText
-                }
-
-                2 -> {
-                    youVersionTranslationPreText = youVersionAfrikaansPreText
-                    youVersionTranslationEndText = youVersionAfrikaansEndText
-                }
-
-                3 -> {
-                    youVersionTranslationPreText = youVersionZuluPreText
-                    youVersionTranslationEndText = youVersionZuluEndText
-                }
-
-                4 -> {
-                    youVersionTranslationPreText = youVersionNorthernSothoPreText
-                    youVersionTranslationEndText = youVersionNorthernSothoEndText
-                }
-
-                5 -> {
-                    youVersionTranslationPreText = youVersionTsongaPreText
-                    youVersionTranslationEndText = youVersionTsongaEndText
-                }
-
-                6 -> {
-                    youVersionTranslationPreText = youVersionSouthernNdebelePreText
-                    youVersionTranslationEndText = youVersionSouthernNdebeleEndText
-                }
-
-                7 -> {
-                    youVersionTranslationPreText = youVersionEnglishHCSBPreText
-                    youVersionTranslationEndText = youVersionEnglishHCSBEndText
-                }
-
-                else -> {
-                    youVersionTranslationPreText = youVersionEnglishPreText
-                    youVersionTranslationEndText = youVersionEnglishEndText
-                }
-            }
-        } //loadFromSharedPreferences
-
-        fun readLinesFromAssets(context: Context?, fileName: String): List<String> {
-            return try {
-                val assetManager: AssetManager = requireContext().assets
-                val inputStream = assetManager.open(fileName)
-                val reader = BufferedReader(InputStreamReader(inputStream))
-                return reader.readLines()
-                    .also { reader.close() } // Read all lines and close the reader
-            } catch (e: IOException) {
-                Log.e(TAG, "Error reading file from assets", e)
-                emptyList() // Return an empty list in case of an error
-            }
-        }
-
-        // Usage in an Activity or Fragment
-        fun loadFileContent() {
-            parashaLine = ""
-            val lines = readLinesFromAssets(context, FILENAME)
-            var indexInt = 0;
-            lines.forEach { line ->
-                println(line) // Print each line or handle as needed
-                if (indexInt == parashaPosition) {
-                    Log.i(
-                        TAG,
-                        "\nloadFileContent: indexInt ($indexInt) == parashaPosition ($parashaPosition)\n"
-                    )
-                    parashaLine = line
-                }
-                Log.i(TAG, "\nloadFileContent: parashaLine: $parashaLine")
-                indexInt++
+    fun loadReading() {
+        when (selectedBibleTranslation) {
+            -1, 0 -> {
+                youVersionTranslationPreText = youVersionEnglishPreText
+                youVersionTranslationEndText = youVersionEnglishEndText
             }
 
-            Log.i(TAG, "end of method -> loadFileContent -> parashaLine: $parashaLine")
+            1 -> {
+                youVersionTranslationPreText = youVersionXhosaPreText
+                youVersionTranslationEndText = youVersionXhosaEndText
+            }
+
+            2 -> {
+                youVersionTranslationPreText = youVersionAfrikaansPreText
+                youVersionTranslationEndText = youVersionAfrikaansEndText
+            }
+
+            3 -> {
+                youVersionTranslationPreText = youVersionZuluPreText
+                youVersionTranslationEndText = youVersionZuluEndText
+            }
+
+            4 -> {
+                youVersionTranslationPreText = youVersionNorthernSothoPreText
+                youVersionTranslationEndText = youVersionNorthernSothoEndText
+            }
+
+            5 -> {
+                youVersionTranslationPreText = youVersionTsongaPreText
+                youVersionTranslationEndText = youVersionTsongaEndText
+            }
+
+            6 -> {
+                youVersionTranslationPreText = youVersionSouthernNdebelePreText
+                youVersionTranslationEndText = youVersionSouthernNdebeleEndText
+            }
+
+            7 -> {
+                youVersionTranslationPreText = youVersionEnglishHCSBPreText
+                youVersionTranslationEndText = youVersionEnglishHCSBEndText
+            }
+
+            else -> {
+                youVersionTranslationPreText = youVersionEnglishPreText
+                youVersionTranslationEndText = youVersionEnglishEndText
+            }
         }
+    } //loadFromSharedPreferences
+
+    fun readLinesFromAssets(context: Context?, fileName: String): List<String> {
+        return try {
+            val assetManager: AssetManager = requireContext().assets
+            val inputStream = assetManager.open(fileName)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            return reader.readLines()
+                .also { reader.close() } // Read all lines and close the reader
+        } catch (e: IOException) {
+            Log.e(TAG, "Error reading file from assets", e)
+            emptyList() // Return an empty list in case of an error
+        }
+    }
+
+    // Usage in an Activity or Fragment
+    fun loadFileContent() {
+        parashaLine = ""
+        val lines = readLinesFromAssets(context, FILENAME)
+        var indexInt = 0;
+        lines.forEach { line ->
+            println(line) // Print each line or handle as needed
+            if (indexInt == parashaPosition) {
+                Log.i(
+                    TAG,
+                    "\nloadFileContent: indexInt ($indexInt) == parashaPosition ($parashaPosition)\n"
+                )
+                parashaLine = line
+            }
+            Log.i(TAG, "\nloadFileContent: parashaLine: $parashaLine")
+            indexInt++
+        }
+
+        Log.i(TAG, "end of method -> loadFileContent -> parashaLine: $parashaLine")
     }
 
     companion object {
