@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadingsapplication.AssetReader.FileReader
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
 import za.co.howtogeek.shabbatreadinsapplication.R
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 private val TAG = "readings5785 -> ReadingListFragment -> "
+private val FILENAME = "ffoz_berasheet_5785.txt"
 
 class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener {
 
@@ -33,15 +36,72 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         val readingListFragmentTitleText: TextView = view.findViewById(R.id.reading_list_fragment_title_text)
         readingListFragmentTitleText.text = getString(R.string.first_fruit_of_zion)
 
+        /**
+         * 23/10 06:37:
+         *
+         * parashaNames = ArrayList<String>()
+         *         // Initialize parashaNames
+         *
+         *         var mLine: String?
+         *
+         *         try {
+         *             // Open the file from assets or external storage based on your requirement
+         *             val assetManager = context.assets
+         *             val inputStream = assetManager.open(filename)
+         *             val reader = BufferedReader(InputStreamReader(inputStream))
+         *
+         *             //new:
+         *             var index = 0;
+         *             while (reader.readLine().also { mLine = it } != null) {
+         *                 val tempElements = mLine!!.split(",")
+         *                 parashaNames.add(tempElements[0])
+         *                 Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
+         *                 index++
+         *             }
+         *             reader.close()
+         *         } catch (e: Exception) {
+         *             e.printStackTrace()
+         *         }
+         *
+         *         //Output arrayList
+         *         for (line in parashaNames) {
+         *             Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
+         *         }
+         */
+
+
+
         val context = requireContext()
-        //initialize parashaNames
-        parashaNames = try {
-            FileReader.readFile(context.assets.open("ffoz_berasheet_5785.txt")) as ArrayList<String>
+
+        //[new]
+        parashaNames = ArrayList<String>()
+        // Initialize parashaNames
+
+        var mLine: String?
+
+        try {
+            // Open the file from assets or external storage based on your requirement
+            val assetManager = context.assets
+            val inputStream = assetManager.open(FILENAME)
+            val reader = BufferedReader(InputStreamReader(inputStream))
+
+            //new:
+            var index = 0;
+            while (reader.readLine().also { mLine = it } != null) {
+                val tempElements = mLine!!.split(",")
+                parashaNames.add(tempElements[0])
+                Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
+                index++
+            }
+            reader.close()
         } catch (e: Exception) {
-            Log.e(TAG, "Error reading file: ${e.message}", e)
-            arrayListOf<String>() // Return an empty ArrayList in case of error
+            e.printStackTrace()
         }
-        Log.i(TAG, "onCreateView: parashaNames populated?!")
+
+        //Output arrayList
+        for (line in parashaNames) {
+            Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
+        }
 
         // RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
