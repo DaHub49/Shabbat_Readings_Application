@@ -114,7 +114,14 @@ class ShabbatDetailFragment : Fragment() {
         val context = requireContext()
 
         //importFFOZFile()
-        arguments?.let {
+        //arguments?.let {
+        //}
+        if(arguments==null){ //if(!arguments) ??
+            sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            val loadedValue = sharedPreferences.getInt("parashaPosition", 0)
+            Log.i(TAG, "onCreate: loadedValue: $loadedValue")
+            parashaPosition = loadedValue
+        } else {
             parashaPosition = arguments?.getInt("parashaPosition")!!
             Log.i(TAG, "onCreate -> parashaPosition after assignment from Bundle: " + parashaPosition)
 

@@ -1,6 +1,8 @@
 package za.co.howtogeek.shabbatreadinsapplication.readings5785
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +24,9 @@ private val TAG = "readings5785 -> ReadingListFragment -> "
 private val FILENAME = "ffoz_berasheet_5785.txt"
 
 class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener {
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ShabbatReadingAdapter
@@ -90,17 +95,14 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         val parashaName = parashaNames[position]
         Log.i(TAG, "onItemClick -> parashaName: $parashaName")
 
-        /*val bibleSelectionFragment: SettingsFragment = SettingsFragment()
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, bibleSelectionFragment)
-                .addToBackStack(null).commit()
-             */
+        //update SharedPreferences [27/10/24]:
+        sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("parashaPosition", position)
+        editor.commit()
 
-        val shabbatDetailFragment: ShabbatDetailFragment = ShabbatDetailFragment()
+        val shabbatDetailFragment = ShabbatDetailFragment()
         val bundle = Bundle()
-        //Rather pass string:
-        //bundle.putString("parashaLine", parashaLine)
 
         bundle.putInt("parashaPosition", position)
         shabbatDetailFragment.arguments = bundle
