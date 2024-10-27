@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import za.co.howtogeek.shabbatreadinsapplication.adapters.YouVersionTranslationsAdapter
 
 /**
  * A simple [Fragment] subclass that allows the user to select the desired YouVersion
@@ -28,10 +29,9 @@ import androidx.recyclerview.widget.RecyclerView
  */
 private val TAG = "settings -> YouVersionTranslationFragment -> "
 
-class YouVersionTranslationFragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener {
+class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.OnItemClickListener {
 
     private lateinit var translation_recycler_view: RecyclerView
-    private lateinit var adapter: ShabbatReadingAdapter
     //val list1 = ArrayList<String>() // Creates an empty ArrayList of type String
     private lateinit var translations: ArrayList<String>
         // Initialize parashaNames
@@ -39,6 +39,13 @@ class YouVersionTranslationFragment : Fragment(), ShabbatReadingAdapter.OnItemCl
     //SharedPreferences:
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+
+    //1. Define interface
+    interface OnTranslationClickListener {
+        fun onTranslationClick(translation: String)
+    }
+
+    //2. DO GEMINI STEP2 IN ADAPTER @27/10/24 11:36
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,12 +74,10 @@ class YouVersionTranslationFragment : Fragment(), ShabbatReadingAdapter.OnItemCl
 
         //2. vertical layout manager
         translation_recycler_view.layoutManager = LinearLayoutManager(requireContext())
-        //4. Pass ArrayList to adapter:
-        adapter = ShabbatReadingAdapter(
-            requireContext(),
-            translations,
-            this)
 
+        //4. Pass ArrayList to adapter:
+        val adapter =
+            YouVersionTranslationsAdapter(requireContext(), this)
         translation_recycler_view.adapter = adapter
 
         return view
@@ -81,31 +86,27 @@ class YouVersionTranslationFragment : Fragment(), ShabbatReadingAdapter.OnItemCl
 
     override fun onItemClick(position: Int) {
 
-        val bundle = Bundle().apply {
+        /*val bundle = Bundle().apply {
             putInt("parashaPosition", position)
         }
+         */
 
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         val shabbatDetailFragment = ShabbatDetailFragment()
         fragmentTransaction.replace(R.id.fragment_container, shabbatDetailFragment)
-        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        //val intent: Intent = s, ShabbatReadingActivity.class)
-        //findNavController().navigate(R.id.action_ReadingListFragment_to_ShabbatDetailFragment, bundle)
 
     }
 
 
 
-    /*override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+    fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == "pref_bible_translation") {
             val selectedTranslation = sharedPreferences?.getString(key, "youversion_english") ?: "youversion_english"
             // Store or use the selectedTranslation value as needed
         }
     }
-     */
-
     //populate the views now that the layout has been inflated:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

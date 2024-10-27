@@ -58,6 +58,9 @@ class ShabbatDetailFragment : Fragment() {
     private val youVersionEnglishPreText = "https://bible.com/bible/316/"
     private val youVersionEnglishEndText = ".TS2009"
 
+    private val youVersionEnglishASVPreText = "https://bible.com/bible/12/"
+    private val youVersionEnglishASVEndText = ".ASV"
+
     private val youVersionEnglishHCSBPreText = "https://bible.com/bible/72/"
     private val youVersionEnglishHCSBEndText = ".HCSB"
 
@@ -220,6 +223,11 @@ class ShabbatDetailFragment : Fragment() {
         //    private var youVersionHaftarahURL: String? = null
         //     private var youVersionNTURL: String? = null
         Log.i(TAG, "onViewCreated: parashaLine: $parashaLine")
+        if (parashaLine==null){
+            parashaLine = importReading(FILENAME, parashaPosition)
+        }
+        Log.i(TAG, "onViewCreated: parashaLine: $parashaLine")
+
         val parashaElements = parashaLine!!.split(",")
         parashaName = parashaElements.get(0)
         mNewShabbatReading = ShabbatReading(
@@ -480,6 +488,11 @@ class ShabbatDetailFragment : Fragment() {
             7 -> {
                 youVersionTranslationPreText = youVersionEnglishHCSBPreText
                 youVersionTranslationEndText = youVersionEnglishHCSBEndText
+            }
+
+            8 -> {
+                youVersionTranslationPreText = youVersionEnglishASVPreText
+                youVersionTranslationEndText = youVersionEnglishASVEndText
             }
 
             else -> {
