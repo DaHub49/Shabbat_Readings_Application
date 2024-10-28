@@ -22,6 +22,7 @@ import java.io.InputStreamReader
 
 private val TAG = "readings5785 -> ReadingListFragment -> "
 private val FILENAME = "ffoz_berasheet_5785.txt"
+private val PREFERENCES = "my_prefs"
 
 class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener {
 
@@ -96,7 +97,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         Log.i(TAG, "onItemClick -> parashaName: $parashaName")
 
         //update SharedPreferences [27/10/24]:
-        sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putInt("parashaPosition", position)
         editor.commit()

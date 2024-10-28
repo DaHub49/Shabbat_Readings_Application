@@ -75,7 +75,73 @@
     <string name="english">English</string>
     <string name="youversion_bible_translation">YouVersion Bible Translation</string>
 
+    <string-array name="youversion_ts2009_translations">
+        <item>English TS2009</item>
+        <item>https://bible.com/bible/316/</item>
+        <item>.TS2009</item>
+    </string-array>
+
+    <string-array name="youversion_nasb_translations">
+        <item>English NASB</item>
+        <item>https://bible.com/bible/12/</item>
+        <item>.ASV</item>
+    </string-array>
+
+    <string-array name="youversion_hcsb_translations">
+        <item>English HCSB</item>
+        <item>https://bible.com/bible/72/</item>
+        <item>.HCSB</item>
+    </string-array>
+
+    <string-array name="youversion_xhosa_translations">
+        <item>Xhosa</item>
+        <item>https://www.bible.com/bible/281/</item>
+        <item>.XHO75</item>
+    </string-array>
+
+    <string-array name="youversion_zulu_translations">
+        <item>Zulu</item>
+        <item>https://www.bible.com/bible/286/</item>
+        <item>.ZUL59</item>
+    </string-array>
+
+    <string-array name="youversion_afrikaans_translations">
+        <item>Afrikaans</item>
+        <item>https://www.bible.com/bible/6/</item>
+        <item>.AFR83</item>
+    </string-array>
+
+    <string-array name="youversion_northern_sotho_translations">
+        <item>Northern Sotho</item>
+        <item>https://www.bible.com/bible/607/</item>
+        <item>.CSEB24</item>
+    </string-array>
+
+    <string-array name="youversion_tsonga_translations">
+        <item>Tsonga</item>
+        <item>https://bible.com/bible/607/</item>
+        <item>.TSO29</item>
+    </string-array>
+
+    <string-array name="youversion_southern_ndebele_translations">
+        <item>Southern Ndebele</item>
+        <item>https://bible.com/bible/450/</item>
+        <item>.SND12</item>
+    </string-array>
+
     <string-array name="youversion_translations">
+        <item>English TS2009</item>
+        <item>English NASB</item>
+        <item>English HCSB</item>
+        <item>Xhosa</item>
+        <item>Zulu</item>
+        <item>Afrikaans</item>
+        <item>Northern Sotho</item>
+        <item>Tsonga</item>
+        <item>Southern Ndebele</item>
+    </string-array>
+
+    <string-array name="youversion_translations_key">
         <item>English TS2009</item>
         <item>English NASB</item>
         <item>English HCSB</item>
@@ -85,6 +151,7 @@
         <item>Northern Sotho</item>
         <item>Tsonga</item>
         <item>Southern Ndebele</item>
+
     </string-array>
 
     <string name="parsha_name_placeholder">[parsha name]</string>

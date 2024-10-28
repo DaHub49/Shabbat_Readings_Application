@@ -33,6 +33,26 @@ import java.io.InputStreamReader
  * 4. " " JUST REMEMBER TO FIND ALL OCCURRENCES OF OLD TEXT FILES AND THEN CHANGE TO NEW ONES
  */
 
+/* translationIndex
+
+Example String array:
+   <string-array name="youversion_ts2009_translations">
+        <item>English TS2009</item>
+        <item>https://bible.com/bible/316/</item>
+        <item>.TS2009</item>
+    </string-array>
+ *
+ * 0: TS2009 youversion_ts2009_translations
+ * 1: English NASB youversion_nasb_translations
+ * 2: English HCSB youversion_hcsb_translations
+ * 3: Xhosa youversion_xhosa_translations
+ * 4: Zulu youversion_zulu_translations
+ * 5: Afrikaans youversion_afrikaans_translations
+ * 6: Northern Sotho youversion_northern_sotho_translations
+ * 7: Tsonga youversion_tsonga_translations
+ * 8: Southern Ndebele youversion_ndebele_translations
+ */
+
 /**
  * Links:
  * 1. https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android
@@ -41,6 +61,7 @@ import java.io.InputStreamReader
  */
 private val TAG = "fragments -> ShabbatDetailFragment ->"
 private val FILENAME = "ffoz_berasheet_5785.txt"
+private val PREFERENCES = "my_prefs"
 
 class ShabbatDetailFragment : Fragment() {
 
@@ -120,7 +141,7 @@ class ShabbatDetailFragment : Fragment() {
         //arguments?.let {
         //}
         if(arguments==null){ //if(!arguments) ??
-            sharedPreferences = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+            sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
             val loadedValue = sharedPreferences.getInt("parashaPosition", 0)
             Log.i(TAG, "onCreate: loadedValue: $loadedValue")
             parashaPosition = loadedValue
@@ -145,24 +166,6 @@ class ShabbatDetailFragment : Fragment() {
         }
 
 
-    }
-
-    fun readLineAtIndex(context: Context, filename: String, index: Int): String? {
-        var lineAtIndex: String? = null
-        try {
-            context.assets.open(filename).bufferedReader().useLines { lines ->
-                for ((currentIndex, line) in lines.withIndex()) {
-                    if (currentIndex == index) {
-                        lineAtIndex = line
-                        Log.i(TAG, "readLineAtIndex: lineAtIndex: $lineAtIndex")
-                        break
-                    }
-                }
-            }
-        } catch (e: IOException) {
-            Log.e("TAG", "Error reading file: ${e.message}", e)
-        }
-        return lineAtIndex
     }
 
     private fun importReading(filename: String, index: Int): String? {

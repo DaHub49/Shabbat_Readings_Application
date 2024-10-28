@@ -26,8 +26,21 @@ import za.co.howtogeek.shabbatreadinsapplication.adapters.YouVersionTranslations
  * Creation date: 16/10/2024 @08:51
  * Update date: 20/10/2024 @06:30: Goal -> To add SharedPreferences to the Bible Settings Fragment
  *
+ * translationIndex
+ *
+ * 0: TS2009
+ * 1: English NASB
+ * 2: English HCSB
+ * 3: Xhosa
+ * 4: Afrikaans
+ * 5: Zulu
+ * 6: Northern Sotho
+ * 7: Tsonga
+ * 8: Southern Ndebele
+ *
  */
 private val TAG = "settings -> YouVersionTranslationFragment -> "
+private val PREFERENCES = "my_prefs"
 
 class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.OnItemClickListener {
 
@@ -40,9 +53,27 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
-    //1. Define interface
-    interface OnTranslationClickListener {
-        fun onTranslationClick(translation: String)
+    override fun OnItemClickListener(translationIndex: Int) {
+        Log.i(TAG, "OnTranslationClickListener -> translationIndex: $translationIndex")
+
+        val sharedPreferences = requireActivity().getSharedPreferences("bibletranslationpreferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val defaultTranslationIndex = 0 // Your default value
+
+        if (!sharedPreferences.contains("translationIndex")) { // Replace with your desired key
+            editor.putInt("translationIndex", translationIndex) // Replace with your desired key
+            editor.apply() // or editor.commit()
+        }
+
+        val bundle = Bundle().apply {
+            putInt("translationIndex", translationIndex)
+        }
+
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        val shabbatDetailFragment = ShabbatDetailFragment()
+        fragmentTransaction.replace(R.id.fragment_container, shabbatDetailFragment)
+        fragmentTransaction.commit()
     }
 
     //2. DO GEMINI STEP2 IN ADAPTER @27/10/24 11:36
@@ -59,12 +90,18 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
 
         val view = inflater.inflate(R.layout.fragment_you_version_translation, container, false)
 
+        /**
+         * sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
+         * val editor = sharedPreferences.edit()
+         * editor.putInt("parashaPosition", position)
+         * editor.commit()
+         */
+
         // Initialize SharedPreferences
-        sharedPreferences = requireActivity().getSharedPreferences("BibleTranslationPreferences", Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
+        sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
 
         // Load saved integer
-        val bibleTranslationInt = sharedPreferences.getInt("bibleTranslationInt", 0)
+        val bibleTranslationInt = sharedPreferences.getInt("bibleTranslationString", 0)
 
         //0. HeaderTextView:
         var reading_list_fragment_title_text: TextView = view.findViewById(R.id.you_version_translation_fragment_title)
@@ -83,23 +120,6 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
         return view
 
     }
-
-    override fun onItemClick(position: Int) {
-
-        /*val bundle = Bundle().apply {
-            putInt("parashaPosition", position)
-        }
-         */
-
-        val fragmentManager = parentFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        val shabbatDetailFragment = ShabbatDetailFragment()
-        fragmentTransaction.replace(R.id.fragment_container, shabbatDetailFragment)
-        fragmentTransaction.commit()
-
-    }
-
-
 
     fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == "pref_bible_translation") {

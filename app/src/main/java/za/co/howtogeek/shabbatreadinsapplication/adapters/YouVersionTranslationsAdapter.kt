@@ -20,8 +20,9 @@ class YouVersionTranslationsAdapter(
 
     //Step 1: Define OnItemClickListener interface (in adapter) for onclicks:
     interface OnItemClickListener{
-        fun onItemClick(position: Int)
+        //fun onItemClick(position: Int)
 
+        fun OnItemClickListener(position: Int)
     }
 
     //ViewHolder for translation, takes in the inflated view and the onClick behavior.
@@ -30,7 +31,7 @@ class YouVersionTranslationsAdapter(
 
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
+                listener.OnItemClickListener(adapterPosition)
             }
         }
     }
