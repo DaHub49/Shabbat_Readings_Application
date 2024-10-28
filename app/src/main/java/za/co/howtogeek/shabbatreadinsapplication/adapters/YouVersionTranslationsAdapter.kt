@@ -1,5 +1,6 @@
 package za.co.howtogeek.shabbatreadinsapplication.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class YouVersionTranslationsAdapter(
     interface OnItemClickListener{
         //fun onItemClick(position: Int)
 
+        @SuppressLint("NotConstructor")
         fun OnItemClickListener(position: Int)
     }
 

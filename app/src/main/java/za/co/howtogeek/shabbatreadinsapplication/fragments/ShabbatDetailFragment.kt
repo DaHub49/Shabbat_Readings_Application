@@ -4,7 +4,6 @@ import YouVersionTranslationFragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.AssetManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -16,9 +15,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import za.co.howtogeek.shabbatreadingsapplication.objects.ShabbatReading
 import za.co.howtogeek.shabbatreadinsapplication.R
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 
 
 /**
@@ -61,7 +58,9 @@ Example String array:
  */
 private val TAG = "fragments -> ShabbatDetailFragment ->"
 private val FILENAME = "ffoz_berasheet_5785.txt"
-private val PREFERENCES = "my_prefs"
+private val PREFERENCES = "preferences"
+private val PARASHAPOSITION = "parashaPosition"
+private val TRANSLATIONINDEX = "translationIndex"
 
 class ShabbatDetailFragment : Fragment() {
 
@@ -119,6 +118,7 @@ class ShabbatDetailFragment : Fragment() {
 
     private var parashaLine: String? = null
     private var parashaPosition: Int = 0
+    private var translationIndex: Int = 0
     private var parashaName = "[Parasha Name]"
 
     private val selectedFragment: String? = null
@@ -137,6 +137,8 @@ class ShabbatDetailFragment : Fragment() {
         parashaName = ""
         val context = requireContext()
 
+        loadFromSharedPreferences()
+
         //importFFOZFile()
         //arguments?.let {
         //}
@@ -146,7 +148,7 @@ class ShabbatDetailFragment : Fragment() {
             Log.i(TAG, "onCreate: loadedValue: $loadedValue")
             parashaPosition = loadedValue
         } else {
-            parashaPosition = arguments?.getInt("parashaPosition")!!
+            parashaPosition = arguments?.getInt(PARASHAPOSITION)!!
             Log.i(TAG, "onCreate -> parashaPosition after assignment from Bundle: " + parashaPosition)
 
             parashaName = ""
@@ -451,6 +453,19 @@ class ShabbatDetailFragment : Fragment() {
         Log.i(TAG, "assignMySwordReadings -> mySwordGospelReadings: $mySwordGospelReadings")
     }
 
+    fun loadFromSharedPreferences() {
+        Log.i(TAG, "loadFromSharedPreferences: [called]")
+        sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
+
+        parashaPosition = sharedPreferences.getInt(PARASHAPOSITION, 0)
+        Log.i(TAG, "loadFromSharedPreferences -> parashaPosition: $parashaPosition")
+
+        translationIndex = sharedPreferences.getInt(TRANSLATIONINDEX, 0)
+        Log.i(TAG, "loadFromSharedPreferences -> translationIndex: $translationIndex")
+
+
+    }
+
     fun loadReading() {
         when (selectedBibleTranslation) {
             -1, 0 -> {
@@ -504,40 +519,6 @@ class ShabbatDetailFragment : Fragment() {
             }
         }
     } //loadFromSharedPreferences
-
-    fun readLinesFromAssets(context: Context?, fileName: String): List<String> {
-        return try {
-            val assetManager: AssetManager = requireContext().assets
-            val inputStream = assetManager.open(fileName)
-            val reader = BufferedReader(InputStreamReader(inputStream))
-            return reader.readLines()
-                .also { reader.close() } // Read all lines and close the reader
-        } catch (e: IOException) {
-            Log.e(TAG, "Error reading file from assets", e)
-            emptyList() // Return an empty list in case of an error
-        }
-    }
-
-    // Usage in an Activity or Fragment
-    fun loadFileContent() {
-        parashaLine = ""
-        val lines = readLinesFromAssets(context, FILENAME)
-        var indexInt = 0;
-        lines.forEach { line ->
-            println(line) // Print each line or handle as needed
-            if (indexInt == parashaPosition) {
-                Log.i(
-                    TAG,
-                    "\nloadFileContent: indexInt ($indexInt) == parashaPosition ($parashaPosition)\n"
-                )
-                parashaLine = line
-            }
-            Log.i(TAG, "\nloadFileContent: parashaLine: $parashaLine")
-            indexInt++
-        }
-
-        Log.i(TAG, "end of method -> loadFileContent -> parashaLine: $parashaLine")
-    }
 
     companion object {
         //20/10:
