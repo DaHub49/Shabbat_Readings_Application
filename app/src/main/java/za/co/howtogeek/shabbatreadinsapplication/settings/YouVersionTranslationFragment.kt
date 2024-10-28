@@ -40,34 +40,37 @@ import za.co.howtogeek.shabbatreadinsapplication.adapters.YouVersionTranslations
  *
  */
 private val TAG = "settings -> YouVersionTranslationFragment -> "
-private val PREFERENCES = "my_prefs"
+private val PREFERENCES = "preferences"
+private val TRANSLATIONINDEX = "translationIndex"
 
 class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.OnItemClickListener {
 
     private lateinit var translation_recycler_view: RecyclerView
     //val list1 = ArrayList<String>() // Creates an empty ArrayList of type String
     private lateinit var translations: ArrayList<String>
-        // Initialize parashaNames
+    // Initialize parashaNames
+
+    private lateinit var adapter: YouVersionTranslationsAdapter
 
     //SharedPreferences:
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
-    override fun OnItemClickListener(translationIndex: Int) {
-        Log.i(TAG, "OnTranslationClickListener -> translationIndex: $translationIndex")
+    override fun OnItemClickListener(position: Int) {
+        /**
+         * Stll need to do:
+         */
+        Log.i(TAG, "OnItemClickListener: position [argument]: $position")
+        Log.i(TAG, "OnItemClickListener -> [before edit] sharedPreferences.getInt(TRANSLATIONINDEX, 0): ${sharedPreferences.getInt(TRANSLATIONINDEX, 0)}")
 
-        val sharedPreferences = requireActivity().getSharedPreferences("bibletranslationpreferences", Context.MODE_PRIVATE)
+        val sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        val defaultTranslationIndex = 0 // Your default value
 
-        if (!sharedPreferences.contains("translationIndex")) { // Replace with your desired key
-            editor.putInt("translationIndex", translationIndex) // Replace with your desired key
-            editor.apply() // or editor.commit()
-        }
+        sharedPreferences.contains(TRANSLATIONINDEX)
+        editor.putInt(TRANSLATIONINDEX, position)
+        editor.apply()
 
-        val bundle = Bundle().apply {
-            putInt("translationIndex", translationIndex)
-        }
+        Log.i(TAG, "OnItemClickListener -> [after edit] sharedPreferences.getInt(TRANSLATIONINDEX, 0): ${sharedPreferences.getInt(TRANSLATIONINDEX, 0)}")
 
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -101,7 +104,7 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
         sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
 
         // Load saved integer
-        val bibleTranslationInt = sharedPreferences.getInt("bibleTranslationString", 0)
+        val bibleTranslationInt = sharedPreferences.getInt(TRANSLATIONINDEX, 0)
 
         //0. HeaderTextView:
         var reading_list_fragment_title_text: TextView = view.findViewById(R.id.you_version_translation_fragment_title)
@@ -113,8 +116,7 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
         translation_recycler_view.layoutManager = LinearLayoutManager(requireContext())
 
         //4. Pass ArrayList to adapter:
-        val adapter =
-            YouVersionTranslationsAdapter(requireContext(), this)
+        val adapter = YouVersionTranslationsAdapter(requireContext(), this)
         translation_recycler_view.adapter = adapter
 
         return view

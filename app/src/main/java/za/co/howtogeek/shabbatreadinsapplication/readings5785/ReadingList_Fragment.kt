@@ -22,13 +22,13 @@ import java.io.InputStreamReader
 
 private val TAG = "readings5785 -> ReadingListFragment -> "
 private val FILENAME = "ffoz_berasheet_5785.txt"
-private val PREFERENCES = "my_prefs"
+private val PREFERENCES = "preferences"
+private val PARASHA_POSITION = "parashaPosition"
+private const val PARENTFRAGMENT = 1 //0 for ReadingList_Fragment, 1 for AdditionalReadingsFragment
 
 class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener {
 
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ShabbatReadingAdapter
     private lateinit var parashaNames: ArrayList<String>
@@ -99,22 +99,19 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         //update SharedPreferences [27/10/24]:
         sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putInt("parashaPosition", position)
+        editor.putInt(PARASHA_POSITION, position)
+        editor.putInt("parentFragment", PARENTFRAGMENT)
         editor.commit()
 
         val shabbatDetailFragment = ShabbatDetailFragment()
         val bundle = Bundle()
 
-        bundle.putInt("parashaPosition", position)
+        //bundle.putInt("parashaPosition", position)
         shabbatDetailFragment.arguments = bundle
         val fragmentManager = requireActivity().supportFragmentManager
         fragmentManager.beginTransaction()
             .replace(R.id.fragment_container, shabbatDetailFragment)
             .addToBackStack(null).commit()
-
-        // Assuming you're using Safe Args for navigation
-        //val action = ReadingListFragmentactionDirections.actionReadingListFragmentToShabbatDetailFragment(position)
-        //findNavController().navigate(action)
     }
 
     /*

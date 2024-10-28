@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import za.co.howtogeek.shabbatreadinsapplication.R
 import za.co.howtogeek.shabbatreadinsapplication.readings5785.ReadingList_Fragment
 
@@ -47,12 +45,20 @@ class HomeFragment : Fragment() {
             fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
 
             fragmentTransaction.commit()
-
-            // Use findNavController to navigate
-            //findNavController().navigate(R.id.action_HomeFragment_to_ReadingListFragment)
-
         }
-        val additional_readings_launcher = view.findViewById<TextView>(R.id.additional_readings_launcher)
+
+        view.findViewById<TextView>(R.id.additional_readings_launcher).setOnClickListener {
+            Log.i(TAG, "onViewCreated: additionalReadingsLauncher: clicked")
+
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            val additionalReadingsFragment = AdditionalReadingsFragment()
+            fragmentTransaction.replace(R.id.fragment_container, additionalReadingsFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+
+            fragmentTransaction.commit()
+        }
         val links_launcher = view.findViewById<TextView>(R.id.links_launcher)
         val about_launcher = view.findViewById<TextView>(R.id.about_launcher)
         val youversion_bible_settings_explanation = view.findViewById<TextView>(R.id.youversion_bible_settings_explanation)
@@ -61,7 +67,7 @@ class HomeFragment : Fragment() {
         // Set click listeners for buttons
 
 
-        additional_readings_launcher.setOnClickListener {
+        /*additional_readings_launcher.setOnClickListener {
             // Handle button 2 click
             Toast.makeText(activity, "additional_readings_launcher clicked", Toast.LENGTH_SHORT).show()
             // Example: Navigate to another fragment or activity
@@ -71,6 +77,7 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
              */
         }
+         */
 
         links_launcher.setOnClickListener {
             // Handle button 1 click

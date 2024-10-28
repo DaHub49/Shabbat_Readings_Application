@@ -13,6 +13,7 @@ import za.co.howtogeek.shabbatreadinsapplication.R
 private val TAG = "za.co.howtogeek.shabbatreadingsapplication.adapters -> ShabbatReadingAdapter -> "
 
 class ShabbatReadingAdapter(
+    //private val parentFragment: Int, //0 for FFOZ, 1 for Additional Readings
     private val context: Context,
     private var parashaNames: ArrayList<String>,
     private val listener: OnItemClickListener

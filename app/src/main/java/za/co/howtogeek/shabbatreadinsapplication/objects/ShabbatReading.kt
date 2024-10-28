@@ -22,7 +22,7 @@ data class ShabbatReading(
 
     val readingSetString: String
         get() = when (readingSet) {
-            0 -> "Lion and Lamb Ministries"
+            0 -> "Additional Readings"
             1 -> "First Fruits of Zion"
             else -> "Error loading reading set name"
         }
