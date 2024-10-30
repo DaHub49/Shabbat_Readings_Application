@@ -18,6 +18,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadinsapplication.adapters.YouVersionTranslationsAdapter
+import za.co.howtogeek.shabbatreadinsapplication.fragments.AdditionalReadingsDetailFragment
+import kotlin.properties.Delegates
 
 /**
  * A simple [Fragment] subclass that allows the user to select the desired YouVersion
@@ -48,6 +50,7 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
     private lateinit var translation_recycler_view: RecyclerView
     //val list1 = ArrayList<String>() // Creates an empty ArrayList of type String
     private lateinit var translations: ArrayList<String>
+    private var callerFragment: Int = -1
     // Initialize parashaNames
 
     private lateinit var adapter: YouVersionTranslationsAdapter
@@ -74,8 +77,20 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
 
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        val shabbatDetailFragment = ShabbatDetailFragment()
-        fragmentTransaction.replace(R.id.fragment_container, shabbatDetailFragment)
+        //// 0 for ShabbatDetailFragment, 1 for AdditionalReaddingsDetailFragment
+        when (callerFragment)  {
+            0 -> {
+                val shabbatDetailFragment = ShabbatDetailFragment()
+                fragmentTransaction.replace(R.id.fragment_container, shabbatDetailFragment)
+            }
+            1 -> {
+                val additionalReadingsDetailFragment = AdditionalReadingsDetailFragment()
+                fragmentTransaction.replace(R.id.fragment_container, additionalReadingsDetailFragment)
+            }
+            else -> {
+                Log.i(TAG, "OnItemClickListener: Error selecting correct fragment")
+            }
+        }
         fragmentTransaction.commit()
     }
 
@@ -83,6 +98,11 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //val userName = arguments?.getString("userName")
+        //    val userAge = arguments?.getInt("userAge")
+        //callerFragment
+        callerFragment = arguments?.getInt("callerFragment", -1)!!
 
         //Load the string array into the ArrayList
         translations = ArrayList(resources.getStringArray(R.array.youversion_translations).toList())

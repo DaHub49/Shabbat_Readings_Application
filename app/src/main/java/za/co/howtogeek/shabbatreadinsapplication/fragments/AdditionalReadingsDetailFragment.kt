@@ -259,10 +259,15 @@ class AdditionalReadingsDetailFragment : Fragment() {
         val bibleTranslationPreferencesTextView = view.findViewById<TextView>(R.id.additionalReadingsBibleTranslationPreferences)
 
         bibleTranslationPreferencesTextView.setOnClickListener {
+            var youVersionTranslationFragment: YouVersionTranslationFragment = YouVersionTranslationFragment()
+            var bundle = Bundle()
+            bundle.putInt("callerFragment", 1) // 0 for ShabbatDetailFragment, 1 for AdditionalReaddingsDetailFragment
+            youVersionTranslationFragment.setArguments(bundle) // pass the bundle to the fragmentarguments
+
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, YouVersionTranslationFragment())
-                .addToBackStack(null).commit()
+                .replace(R.id.fragment_container, youVersionTranslationFragment)
+                .commit()
         }
 
         //RadioGroups and RadioButtons:
