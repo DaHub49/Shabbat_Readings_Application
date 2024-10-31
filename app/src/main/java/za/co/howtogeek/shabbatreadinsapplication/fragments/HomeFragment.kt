@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadinsapplication.fragments.AboutFragment
+import za.co.howtogeek.shabbatreadinsapplication.fragments.LinksFragment
 import za.co.howtogeek.shabbatreadinsapplication.readings5785.ReadingList_Fragment
 
 class HomeFragment : Fragment() {
@@ -60,7 +63,17 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
         val links_launcher = view.findViewById<TextView>(R.id.links_launcher)
-        val about_launcher = view.findViewById<TextView>(R.id.about_launcher)
+
+        view.findViewById<TextView>(R.id.about_launcher).setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            val aboutFragment = AboutFragment()
+            fragmentTransaction.replace(R.id.fragment_container, aboutFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+
+            fragmentTransaction.commit()
+        }
         val youversion_bible_settings_explanation = view.findViewById<TextView>(R.id.youversion_bible_settings_explanation)
         val mysword_bible_setup = view.findViewById<TextView>(R.id.mysword_bible_setup)
 
@@ -81,12 +94,19 @@ class HomeFragment : Fragment() {
 
         links_launcher.setOnClickListener {
             // Handle button 1 click
-            Toast.makeText(activity, "links_launcher clicked", Toast.LENGTH_SHORT).show()
-        }
 
-        about_launcher.setOnClickListener {
-            // Handle button 2 click
-            Toast.makeText(activity, "about_launcher clicked", Toast.LENGTH_SHORT).show()
+
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            val linksFragment = LinksFragment()
+            fragmentTransaction.replace(R.id.fragment_container, linksFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+
+            fragmentTransaction.commit()
+
+
+            //Toast.makeText(activity, "links_launcher clicked", Toast.LENGTH_SHORT).show()
         }
 
         youversion_bible_settings_explanation.setOnClickListener {

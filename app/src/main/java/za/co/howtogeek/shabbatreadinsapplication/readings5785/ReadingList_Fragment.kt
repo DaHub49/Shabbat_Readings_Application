@@ -114,15 +114,4 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
             .addToBackStack(null).commit()
     }
 
-    /*
-        override fun onItemClick(position: Int) {
-            // Handle item click
-            Log.i(TAG, "onItemClick: [called]")
-            val parashaName = parashaNames[position]
-            Log.i(TAG, "onItemClick -> parashaName: $parashaName")
-            // Assuming you're using Safe Args for navigation
-            //val action = ReadingListFragmentactionDirections.actionReadingListFragmentToShabbatDetailFragment(position)
-            //findNavController().navigate(action)
-        }*/
-
 }
