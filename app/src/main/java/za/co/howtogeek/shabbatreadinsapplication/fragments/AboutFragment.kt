@@ -16,12 +16,12 @@ class AboutFragment : Fragment() {
      * AboutFragment displays some background info about the app via a string hardcoded into the view from strings.xml:
      *
      */
-    private var aboutOrBibleHelp = 0.toChar()
+    private var aboutOrBibleHelp = 'a'
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            val bundle = arguments!!
+            val bundle = requireArguments()
             aboutOrBibleHelp = bundle.getChar("aboutOrBibleHelp", 'a')
         }
     }

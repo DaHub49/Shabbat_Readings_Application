@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -336,6 +337,8 @@ class ShabbatDetailFragment : Fragment() {
 
     fun assignYouVersionReadings() {
         //Log.i(TAG, "assignYouVersionReadings: [called]")
+        var placeholderString: String = ""
+        var replacementString: String = ""
 
         val youVersionElements =
             mNewShabbatReading?.youVersion?.split("#")
@@ -343,8 +346,30 @@ class ShabbatDetailFragment : Fragment() {
         //Log.i(TAG, "assignYouVersionReadings -> youVersionTorahURL: $youVersionTorahURL")
         youVersionHaftarahURL = youVersionElements?.get(1) ?: "null"
         //Log.i(TAG, "assignYouVersionReadings -> youVersionHaftarahURL: $youVersionHaftarahURL")
-        youVersionNTURL = youVersionElements?.get(2) ?: "null"
-        //Log.i(TAG, "assignYouVersionReadings -> youVersionNTURL: $youVersionNTURL")
+
+        /**
+         * 3 Strings:  1: originalString [youVersionElements?.get(2)],
+         *             2: substringToReplace ["joh"],
+         *             3: replacementString ["jhn"]
+         *
+         * val modifiedString = if (originalString.contains(substringToReplace)) {
+         *     originalString.replace(substringToReplace, replacementString)
+         * } else {
+         *     originalString
+         * }
+         *
+         * println(modifiedString) // Output: This is a test string with a new text to replace.
+         */
+
+        placeholderString = youVersionElements?.get(2) ?: "null"
+        replacementString = if (placeholderString.contains("Joh")){
+            Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Joh'!")
+            placeholderString.replace("Joh", "Jhn")
+        } else
+            placeholderString
+
+        youVersionNTURL = replacementString
+        Log.i(TAG, "assignYouVersionReadings -> youVersionNTURL: $youVersionNTURL")
     }
 
     fun assignMySwordReadings() {

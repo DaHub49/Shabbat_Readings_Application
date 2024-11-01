@@ -14,9 +14,11 @@ import za.co.howtogeek.shabbatreadinsapplication.fragments.AboutFragment
 import za.co.howtogeek.shabbatreadinsapplication.fragments.LinksFragment
 import za.co.howtogeek.shabbatreadinsapplication.readings5785.ReadingList_Fragment
 
+private val TAG = "za.co.howtogeek.shabbatreadingsapplication.fragments -> HomeFragment -> "
+
 class HomeFragment : Fragment() {
 
-    private val TAG = "za.co.howtogeek.shabbatreadingsapplication.fragments -> HomeFragment -> "
+    private var aboutOrBibleHelp: Char = 'a'
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Accessing TextView buttons from the fragment layout
+        // First Fruits of Zion Torah Portions cycles:
         view.findViewById<TextView>(R.id.ffoz_launcher).setOnClickListener {
             Log.i(TAG, "onViewCreated: ffozLauncher: clicked")
 
@@ -50,6 +52,7 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
+        //Additional readings:
         view.findViewById<TextView>(R.id.additional_readings_launcher).setOnClickListener {
             Log.i(TAG, "onViewCreated: additionalReadingsLauncher: clicked")
 
@@ -62,20 +65,77 @@ class HomeFragment : Fragment() {
 
             fragmentTransaction.commit()
         }
-        val links_launcher = view.findViewById<TextView>(R.id.links_launcher)
 
-        view.findViewById<TextView>(R.id.about_launcher).setOnClickListener {
+        //Links
+        view.findViewById<TextView>(R.id.links_launcher).setOnClickListener {
+            Log.i(TAG, "onViewCreated: links_launcher: clicked")
+
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
 
+            val linksFragment = LinksFragment()
+            fragmentTransaction.replace(R.id.fragment_container, linksFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+
+            fragmentTransaction.commit()
+        }
+
+        //About page:
+        view.findViewById<TextView>(R.id.about_launcher).setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val bundle = Bundle()
+            bundle.putChar("aboutOrBibleHelp", 'a')
             val aboutFragment = AboutFragment()
+            aboutFragment.arguments = bundle
             fragmentTransaction.replace(R.id.fragment_container, aboutFragment)
             fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
 
             fragmentTransaction.commit()
         }
-        val youversion_bible_settings_explanation = view.findViewById<TextView>(R.id.youversion_bible_settings_explanation)
+
+        /**
+         * links_launcher.setOnClickListener {
+         *             // Handle button 1 click
+         *
+         *
+         *             val fragmentManager = requireActivity().supportFragmentManager
+         *             val fragmentTransaction = fragmentManager.beginTransaction()
+         *
+         *             val linksFragment = LinksFragment()
+         *             fragmentTransaction.replace(R.id.fragment_container, linksFragment)
+         *             fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+         *
+         *             fragmentTransaction.commit()
+         *
+         *
+         *             //Toast.makeText(activity, "links_launcher clicked", Toast.LENGTH_SHORT).show()
+         *         }
+         */
+
+        //Links: YouVersion explanation
+        view.findViewById<TextView>(R.id.youversion_bible_settings_explanation).setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val bundle = Bundle()
+            bundle.putChar("aboutOrBibleHelp", 'b')
+            val aboutFragment = AboutFragment()
+            aboutFragment.arguments = bundle
+            fragmentTransaction.replace(R.id.fragment_container, aboutFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+
+            fragmentTransaction.commit()
+        }
+
+
         val mysword_bible_setup = view.findViewById<TextView>(R.id.mysword_bible_setup)
+        mysword_bible_setup.isEnabled = false
+
+
+        /*mysword_bible_setup.setOnClickListener {
+            // Handle button 2 click
+            Toast.makeText(activity, "mysword_bible_setup clicked", Toast.LENGTH_SHORT).show()
+        }*/
 
         // Set click listeners for buttons
 
@@ -91,34 +151,6 @@ class HomeFragment : Fragment() {
              */
         }
          */
-
-        links_launcher.setOnClickListener {
-            // Handle button 1 click
-
-
-            val fragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            val linksFragment = LinksFragment()
-            fragmentTransaction.replace(R.id.fragment_container, linksFragment)
-            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
-
-            fragmentTransaction.commit()
-
-
-            //Toast.makeText(activity, "links_launcher clicked", Toast.LENGTH_SHORT).show()
-        }
-
-        youversion_bible_settings_explanation.setOnClickListener {
-            // Handle button 1 click
-            Toast.makeText(activity, "youversion_bi0ble_settings_explanation clicked", Toast.LENGTH_SHORT).show()
-            //findNavController().navigate(R.id.action_homeFragment_to_settingsActivity)
-        }
-
-        mysword_bible_setup.setOnClickListener {
-            // Handle button 2 click
-            Toast.makeText(activity, "mysword_bible_setup clicked", Toast.LENGTH_SHORT).show()
-        }
     }
 
 }
