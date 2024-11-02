@@ -1,5 +1,5 @@
 import za.co.howtogeek.shabbatreadingsapplication.fragments.ShabbatDetailFragment
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 
 
 import android.content.Context
@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import za.co.howtogeek.shabbatreadinsapplication.adapters.YouVersionTranslationsAdapter
-import za.co.howtogeek.shabbatreadinsapplication.fragments.AdditionalReadingsDetailFragment
+import za.co.howtogeek.shabbatreadingsapplication.adapters.YouVersionTranslationsAdapter
+import za.co.howtogeek.shabbatreadingsapplication.fragments.AdditionalReadingsDetailFragment
 
 /**
  * A simple [Fragment] subclass that allows the user to select the desired YouVersion

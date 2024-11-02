@@ -1,4 +1,4 @@
-package za.co.howtogeek.shabbatreadinsapplication.adapters
+package za.co.howtogeek.shabbatreadingsapplication.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 
 class YouVersionTranslationsAdapter(
     private val context: Context,

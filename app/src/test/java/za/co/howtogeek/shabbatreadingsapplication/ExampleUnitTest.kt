@@ -1,4 +1,4 @@
-package za.co.howtogeek.shabbatreadinsapplication
+package za.co.howtogeek.shabbatreadingsapplication
 
 import org.junit.Test
 

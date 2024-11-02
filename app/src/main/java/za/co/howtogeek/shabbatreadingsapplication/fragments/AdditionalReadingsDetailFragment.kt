@@ -1,4 +1,4 @@
-package za.co.howtogeek.shabbatreadinsapplication.fragments
+package za.co.howtogeek.shabbatreadingsapplication.fragments
 
 import YouVersionTranslationFragment
 import android.content.Context
@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.TextView
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.IOException
 
 private val TAG = "fragments -> AdditionalReadingsDetailFragment -> "

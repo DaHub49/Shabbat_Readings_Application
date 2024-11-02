@@ -1,4 +1,4 @@
-package za.co.howtogeek.shabbatreadinsapplication.fragments
+package za.co.howtogeek.shabbatreadingsapplication.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 
 class AboutFragment : Fragment() {
     /**

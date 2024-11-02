@@ -1,4 +1,4 @@
-package za.co.howtogeek.shabbatreadinsapplication.fragments
+package za.co.howtogeek.shabbatreadingsapplication.fragments
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 
 private val TAG = "LinksFragment -> "
 

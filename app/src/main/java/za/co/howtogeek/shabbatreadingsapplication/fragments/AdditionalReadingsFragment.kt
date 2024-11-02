@@ -11,8 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
-import za.co.howtogeek.shabbatreadinsapplication.R
-import za.co.howtogeek.shabbatreadinsapplication.fragments.AdditionalReadingsDetailFragment
+import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 

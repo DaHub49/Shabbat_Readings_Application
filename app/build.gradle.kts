@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "za.co.howtogeek.shabbatreadinsapplication"
-    compileSdk = 34
+    namespace = "za.co.howtogeek.shabbatreadingsapplication"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "za.co.howtogeek.shabbatreadinsapplication"
-        minSdk = 31
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = "za.co.howtogeek.shabbatreadingsapplication"
+        minSdk = 29
+        targetSdk = 35
+        versionCode = 44
+        versionName = "Berasheet 5785"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +24,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            //applicationIdSuffix = ".release"
         }
     }
     compileOptions {

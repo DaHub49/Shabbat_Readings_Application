@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 
 //(private val itemList: ArrayList<Item>, private val onClickListener: OnClickListener) :
 private val TAG = "za.co.howtogeek.shabbatreadingsapplication.adapters -> ShabbatReadingAdapter -> "

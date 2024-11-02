@@ -13,7 +13,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import za.co.howtogeek.shabbatreadingsapplication.objects.ShabbatReading
-import za.co.howtogeek.shabbatreadinsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.IOException
 
 

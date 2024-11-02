@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import za.co.howtogeek.shabbatreadinsapplication.R
-import za.co.howtogeek.shabbatreadinsapplication.fragments.AboutFragment
-import za.co.howtogeek.shabbatreadinsapplication.fragments.LinksFragment
-import za.co.howtogeek.shabbatreadinsapplication.readings5785.ReadingList_Fragment
+import za.co.howtogeek.shabbatreadingsapplication.R
+import za.co.howtogeek.shabbatreadingsapplication.readings5785.ReadingList_Fragment
 
 private val TAG = "za.co.howtogeek.shabbatreadingsapplication.fragments -> HomeFragment -> "
 

@@ -1,4 +1,4 @@
-package za.co.howtogeek.shabbatreadinsapplication
+package za.co.howtogeek.shabbatreadingsapplication
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
