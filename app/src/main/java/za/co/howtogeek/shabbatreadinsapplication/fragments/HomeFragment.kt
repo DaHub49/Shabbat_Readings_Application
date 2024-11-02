@@ -1,14 +1,11 @@
 package za.co.howtogeek.shabbatreadingsapplication.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import za.co.howtogeek.shabbatreadinsapplication.R
 import za.co.howtogeek.shabbatreadinsapplication.fragments.AboutFragment
 import za.co.howtogeek.shabbatreadinsapplication.fragments.LinksFragment
@@ -22,7 +19,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("info", "HomeFragment -> onCreate()")
+        //Log.i("info", "HomeFragment -> onCreate()")
         arguments?.let {
         }
     }
@@ -40,7 +37,7 @@ class HomeFragment : Fragment() {
 
         // First Fruits of Zion Torah Portions cycles:
         view.findViewById<TextView>(R.id.ffoz_launcher).setOnClickListener {
-            Log.i(TAG, "onViewCreated: ffozLauncher: clicked")
+            //Log.i(TAG, "onViewCreated: ffozLauncher: clicked")
 
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
@@ -54,7 +51,7 @@ class HomeFragment : Fragment() {
 
         //Additional readings:
         view.findViewById<TextView>(R.id.additional_readings_launcher).setOnClickListener {
-            Log.i(TAG, "onViewCreated: additionalReadingsLauncher: clicked")
+            //Log.i(TAG, "onViewCreated: additionalReadingsLauncher: clicked")
 
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
@@ -68,7 +65,7 @@ class HomeFragment : Fragment() {
 
         //Links
         view.findViewById<TextView>(R.id.links_launcher).setOnClickListener {
-            Log.i(TAG, "onViewCreated: links_launcher: clicked")
+            //Log.i(TAG, "onViewCreated: links_launcher: clicked")
 
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()

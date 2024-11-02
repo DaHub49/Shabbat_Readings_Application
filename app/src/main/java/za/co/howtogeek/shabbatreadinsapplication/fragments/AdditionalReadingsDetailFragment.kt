@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,29 +66,29 @@ class AdditionalReadingsDetailFragment : Fragment() {
         loadFromSharedPreferences()
         loadTranslation()
 
-        Log.i(TAG, "onCreate: parashaLine [before importReading()]: $parashaLine")
+        //Log.i(TAG, "onCreate: parashaLine [before importReading()]: $parashaLine")
         if (parashaLine == null) {
             parashaLine = importReading(FILENAME, parashaPosition)
         }
-        Log.i(TAG, "onCreate: parashaLine [after importReading()]: $parashaLine")
+        //Log.i(TAG, "onCreate: parashaLine [after importReading()]: $parashaLine")
 
         //Bereishit,Joshua,Psalms 1-8,Matthew 1-4,Romans 1-3,Jos.1.1#Psa.1.1#Mat.1.1#Rom.1.1,Jos_1_1#Psa_1_1#Mat_1_1#Rom_1_1
 
         val parashaElements = parashaLine!!.split(",")
         parashaName = parashaElements.get(0)
-        Log.i(TAG, "onCreate: parashaName: $parashaName")
+        //Log.i(TAG, "onCreate: parashaName: $parashaName")
         additionalReadings1 = parashaElements.get(1)
-        Log.i(TAG, "onCreate: additionalReadings1: $additionalReadings1")
+        //Log.i(TAG, "onCreate: additionalReadings1: $additionalReadings1")
         additionalReadings2 = parashaElements.get(2)
-        Log.i(TAG, "onCreate: additionalReadings2: $additionalReadings2")
+        //Log.i(TAG, "onCreate: additionalReadings2: $additionalReadings2")
         additionalReadings3 = parashaElements.get(3)
-        Log.i(TAG, "onCreate: additionalReadings3: $additionalReadings3")
+        //Log.i(TAG, "onCreate: additionalReadings3: $additionalReadings3")
         additionalReadings4 = parashaElements.get(4)
-        Log.i(TAG, "onCreate: additionalReadings4: $additionalReadings4")
+        //Log.i(TAG, "onCreate: additionalReadings4: $additionalReadings4")
         allYouVersionLinks = parashaElements.get(5)
-        Log.i(TAG, "onCreate: allYouVersionLinks: $allYouVersionLinks")
+        //Log.i(TAG, "onCreate: allYouVersionLinks: $allYouVersionLinks")
         allMySwordLinks = parashaElements.get(6)
-        Log.i(TAG, "onCreate: allMySwordLinks: $allMySwordLinks")
+        //Log.i(TAG, "onCreate: allMySwordLinks: $allMySwordLinks")
 
         //Assign readings:
         assignMySwordReadings()
@@ -216,7 +215,7 @@ class AdditionalReadingsDetailFragment : Fragment() {
     }
 
     fun assignYouVersionReadings() {
-        Log.i(TAG, "assignYouVersionReadings: [called]")
+        //Log.i(TAG, "assignYouVersionReadings: [called]")
           
                 /* mySwordAdditionalReadings1 = ""
                  mySwordAdditionalReadings2 = ""
@@ -230,29 +229,29 @@ class AdditionalReadingsDetailFragment : Fragment() {
                  */
 
         val youVersionElements = allYouVersionLinks?.split("#")
-        Log.i(TAG, "assignYouVersionReadings: allYouVersionLinks: $allYouVersionLinks")
+        //Log.i(TAG, "assignYouVersionReadings: allYouVersionLinks: $allYouVersionLinks")
         youVersionAdditionalReadings1 = youVersionElements?.get(0) ?: "null"
-        Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings1: $youVersionAdditionalReadings1")
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings1: $youVersionAdditionalReadings1")
         youVersionAdditionalReadings2 = youVersionElements?.get(1) ?: "null"
-        Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings2: $youVersionAdditionalReadings2")
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings2: $youVersionAdditionalReadings2")
         youVersionAdditionalReadings3 = youVersionElements?.get(2) ?: "null"
-        Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings3: $youVersionAdditionalReadings3")
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings3: $youVersionAdditionalReadings3")
         youVersionAdditionalReadings4 = youVersionElements?.get(3) ?: "null"
-        Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings4: $youVersionAdditionalReadings4")
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings4: $youVersionAdditionalReadings4")
     }
 
     fun assignMySwordReadings() {
-        Log.i(TAG, "assignMySwordReadings: [called]")
-        Log.i(TAG, "assignMySwordReadings: allMySwordLinks: $allMySwordLinks")
+        //Log.i(TAG, "assignMySwordReadings: [called]")
+        //Log.i(TAG, "assignMySwordReadings: allMySwordLinks: $allMySwordLinks")
         val mySwordElements = allMySwordLinks?.split("#")
         mySwordAdditionalReadings1 = mySwordElements?.get(0) ?: "null"
-        Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings1: $mySwordAdditionalReadings1")
+        //Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings1: $mySwordAdditionalReadings1")
         mySwordAdditionalReadings2 = mySwordElements?.get(1) ?: "null"
-        Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings2: $mySwordAdditionalReadings2")
+        //Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings2: $mySwordAdditionalReadings2")
         mySwordAdditionalReadings3 = mySwordElements?.get(2) ?: "null"
-        Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings3: $mySwordAdditionalReadings3")
+        //Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings3: $mySwordAdditionalReadings3")
         mySwordAdditionalReadings4 = mySwordElements?.get(3) ?: "null"
-        Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings4: $mySwordAdditionalReadings4")
+        //Log.i(TAG, "assignMySwordReadings: mySwordAdditionalReadings4: $mySwordAdditionalReadings4")
     }
 
 
@@ -301,13 +300,13 @@ class AdditionalReadingsDetailFragment : Fragment() {
         bibleSelectionRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.addReadingsMySwordRadioButton -> {
-                    Log.i(TAG, "onViewCreated: mySwordRadioButton selected.")
+                    //Log.i(TAG, "onViewCreated: mySwordRadioButton selected.")
                     mySwordRadioButtonSelected = true
                     youVersionRadioButtonSelected = false
                 }
 
                 R.id.addReadingsYouVersionRadioButton -> {
-                    Log.i(TAG, "onViewCreated: youVersionRadioButton selected.")
+                    //Log.i(TAG, "onViewCreated: youVersionRadioButton selected.")
                     mySwordRadioButtonSelected = false
                     youVersionRadioButtonSelected = true
                 }
@@ -321,20 +320,20 @@ class AdditionalReadingsDetailFragment : Fragment() {
         val additionalReadings1TextView = view.findViewById<TextView>(R.id.additionalReadings1TextView)
         additionalReadings1TextView.isClickable = true
         if (additionalReadings1TextView.isEnabled) {
-            Log.i(TAG, "onViewCreated: additionalReadings1TextView.isEnabled")
-        } else Log.i(TAG, "onViewCreated: additionalReadings1TextView.ISNT_Enabled")
+            //Log.i(TAG, "onViewCreated: additionalReadings1TextView.isEnabled")
+        } else //Log.i(TAG, "onViewCreated: additionalReadings1TextView.ISNT_Enabled")
         additionalReadings1TextView.text = additionalReadings1
 
         if (additionalReadings1.equals("null", ignoreCase = true)) {
             additionalReadings1TextView.isEnabled = false
-            Log.i(TAG, "onViewCreated: additionalReadings1 [disabled]")
+            //Log.i(TAG, "onViewCreated: additionalReadings1 [disabled]")
         }// else additionalReadings1TextView.text = additionalReadings1
 
         additionalReadings1TextView.setOnClickListener {
             if (youVersionRadioButtonSelected) {
-                Log.i(TAG, "onViewCreated: additionalReadings1TextView CLICKED")
+                //Log.i(TAG, "onViewCreated: additionalReadings1TextView CLICKED")
                 try {
-                    Log.i(TAG, "onViewCreated: additionalReadings1TextView -> clicked!")
+                    //Log.i(TAG, "onViewCreated: additionalReadings1TextView -> clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
                         youVersionTranslationPreText + youVersionAdditionalReadings1 + youVersionTranslationEndText
@@ -349,7 +348,7 @@ class AdditionalReadingsDetailFragment : Fragment() {
                 }
             } else if (mySwordRadioButtonSelected) {
                 try {
-                    Log.i(TAG, "onViewCreated: mySword clicked!")
+                    //Log.i(TAG, "onViewCreated: mySword clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempMySwordIntent = mySwordPretext + mySwordAdditionalReadings1
                     launchIntent.setData(Uri.parse(tempMySwordIntent))
@@ -366,14 +365,14 @@ class AdditionalReadingsDetailFragment : Fragment() {
         additionalReadings2TextView.isClickable = true
         if (additionalReadings2.equals("null", ignoreCase = true)) {
             additionalReadings2TextView.isEnabled = false
-            Log.i(TAG, "onViewCreated: additionalReadings2 [disabled]")
+            //Log.i(TAG, "onViewCreated: additionalReadings2 [disabled]")
         } else additionalReadings2TextView.text = additionalReadings2
 
         additionalReadings2TextView.isClickable = true
         additionalReadings2TextView.setOnClickListener {
             if (youVersionRadioButtonSelected) {
                 try {
-                    Log.i(TAG, "onViewCreated: additionalReadings2TextView -> clicked!")
+                    //Log.i(TAG, "onViewCreated: additionalReadings2TextView -> clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent = youVersionTranslationPreText + youVersionAdditionalReadings2 + youVersionTranslationEndText
                     //Log.i(TAG, "onViewCreated -> haftarahTextView -> tempYouVersionIntent: $tempYouVersionIntent")
@@ -404,14 +403,14 @@ class AdditionalReadingsDetailFragment : Fragment() {
         additionalReadings3TextView.isClickable = true
         if (additionalReadings3.equals("null", ignoreCase = true)) {
             additionalReadings3TextView.isEnabled = false
-            Log.i(TAG, "onViewCreated: additionalReadings3 [disabled]")
+            //Log.i(TAG, "onViewCreated: additionalReadings3 [disabled]")
         } else additionalReadings3TextView.text = additionalReadings3
 
         additionalReadings3TextView.isClickable = true
         additionalReadings3TextView.setOnClickListener {
             if (youVersionRadioButtonSelected) {
                 try {
-                    Log.i(TAG, "onViewCreated: additionalReadings3TextView -> clicked!")
+                    //Log.i(TAG, "onViewCreated: additionalReadings3TextView -> clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
                         youVersionTranslationPreText + youVersionAdditionalReadings3 + youVersionTranslationEndText
@@ -426,7 +425,7 @@ class AdditionalReadingsDetailFragment : Fragment() {
                 }
             } else if (mySwordRadioButtonSelected) {
                 try {
-                    Log.i(TAG, "onViewCreated: mySword clicked!")
+                    //Log.i(TAG, "onViewCreated: mySword clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempMySwordIntent = mySwordPretext + mySwordAdditionalReadings3
                     launchIntent.setData(Uri.parse(tempMySwordIntent))
@@ -443,14 +442,14 @@ class AdditionalReadingsDetailFragment : Fragment() {
         additionalReadings4TextView.isClickable = true
         if (additionalReadings4.equals("null", ignoreCase = true)) {
             additionalReadings4TextView.isEnabled = false
-            Log.i(TAG, "onViewCreated: additionalReadings4 [disabled]")
+            //Log.i(TAG, "onViewCreated: additionalReadings4 [disabled]")
         } else additionalReadings4TextView.text = additionalReadings4
 
         additionalReadings4TextView.isClickable = true
         additionalReadings4TextView.setOnClickListener {
             if (youVersionRadioButtonSelected) {
                 try {
-                    Log.i(TAG, "onViewCreated: additionalReadings4TextView -> clicked!")
+                    //Log.i(TAG, "onViewCreated: additionalReadings4TextView -> clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempYouVersionIntent =
                         youVersionTranslationPreText + youVersionAdditionalReadings4 + youVersionTranslationEndText
@@ -465,7 +464,7 @@ class AdditionalReadingsDetailFragment : Fragment() {
                 }
             } else if (mySwordRadioButtonSelected) {
                 try {
-                    Log.i(TAG, "onViewCreated: mySword clicked!")
+                    //Log.i(TAG, "onViewCreated: mySword clicked!")
                     val launchIntent = Intent(Intent.ACTION_VIEW)
                     val tempMySwordIntent = mySwordPretext + mySwordAdditionalReadings4
                     launchIntent.setData(Uri.parse(tempMySwordIntent))

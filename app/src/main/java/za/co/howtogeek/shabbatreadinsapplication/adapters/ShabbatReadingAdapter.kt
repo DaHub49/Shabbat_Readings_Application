@@ -1,7 +1,6 @@
 package za.co.howtogeek.shabbatreadingsapplication.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +45,7 @@ class ShabbatReadingAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //val shabbatReading = mList[position]
-        Log.i("info","ShabbatRadingAdapter -> onBindViewHolder() -> mList.get($position)")
+        //Log.i("info","ShabbatRadingAdapter -> onBindViewHolder() -> mList.get($position)")
 
         //val ShabbatReadingHolder = parashaNames[position]
         holder.textView.text = parashaNames[position]

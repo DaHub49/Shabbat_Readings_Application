@@ -4,16 +4,13 @@ package za.co.howtogeek.shabbatreadinsapplication.readings5785
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import za.co.howtogeek.shabbatreadingsapplication.AssetReader.FileReader
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
 import za.co.howtogeek.shabbatreadingsapplication.fragments.ShabbatDetailFragment
 import za.co.howtogeek.shabbatreadinsapplication.R
@@ -21,7 +18,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 private val TAG = "readings5785 -> ReadingListFragment -> "
-private val FILENAME = "ffoz_berasheet_5785.txt"
+private val FILENAME = "messianic_berasheet_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private const val PARENTFRAGMENT = 1 //0 for ReadingList_Fragment, 1 for AdditionalReadingsFragment
@@ -42,7 +39,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
 
         // Header TextView
         val readingListFragmentTitleText: TextView = view.findViewById(R.id.reading_list_fragment_title_text)
-        readingListFragmentTitleText.text = getString(R.string.first_fruit_of_zion)
+        readingListFragmentTitleText.text = getString(R.string.messianic_reading_cycle)
 
         val context = requireContext()
 
@@ -63,7 +60,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
             while (reader.readLine().also { mLine = it } != null) {
                 val tempElements = mLine!!.split(",")
                 parashaNames.add(tempElements[0])
-                Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
+                //Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
                 index++
             }
             reader.close()
@@ -73,7 +70,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
 
         //Output arrayList
         for (line in parashaNames) {
-            Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
+            //Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
         }
 
         // RecyclerView
@@ -92,9 +89,9 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
 
     override fun onItemClick(position: Int) {
         // Handle item click
-        Log.i(TAG, "onItemClick: [called]")
+        //Log.i(TAG, "onItemClick: [called]")
         val parashaName = parashaNames[position]
-        Log.i(TAG, "onItemClick -> parashaName: $parashaName")
+        //Log.i(TAG, "onItemClick -> parashaName: $parashaName")
 
         //update SharedPreferences [27/10/24]:
         sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)

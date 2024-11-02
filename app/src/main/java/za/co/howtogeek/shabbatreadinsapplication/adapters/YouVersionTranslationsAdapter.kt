@@ -2,13 +2,11 @@ package za.co.howtogeek.shabbatreadinsapplication.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter.OnItemClickListener
 import za.co.howtogeek.shabbatreadinsapplication.R
 
 class YouVersionTranslationsAdapter(
@@ -48,7 +46,7 @@ class YouVersionTranslationsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //val shabbatReading = mList[position]
-        Log.i("info", "YouVersionTranslationsAdapter -> onBindViewHolder() -> mList.get($position)")
+        //Log.i("info", "YouVersionTranslationsAdapter -> onBindViewHolder() -> mList.get($position)")
 
         //val ShabbatReadingHolder = parashaNames[position]
         holder.textView.text = translations[position]

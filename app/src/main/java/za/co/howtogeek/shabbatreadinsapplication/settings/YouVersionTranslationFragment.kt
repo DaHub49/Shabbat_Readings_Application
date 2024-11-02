@@ -1,6 +1,3 @@
-import android.content.Intent
-import androidx.fragment.app.replace
-import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
 import za.co.howtogeek.shabbatreadingsapplication.fragments.ShabbatDetailFragment
 import za.co.howtogeek.shabbatreadinsapplication.R
 
@@ -14,12 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadinsapplication.adapters.YouVersionTranslationsAdapter
 import za.co.howtogeek.shabbatreadinsapplication.fragments.AdditionalReadingsDetailFragment
-import kotlin.properties.Delegates
 
 /**
  * A simple [Fragment] subclass that allows the user to select the desired YouVersion
