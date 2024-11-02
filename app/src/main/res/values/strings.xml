@@ -181,4 +181,6 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="select_translation">Select Translation\n</string>
     <string name="text_placeholder">[text]</string>
+    <string name="messianic_reading_cycle">Messianic Reading Cycle</string>
+    <string name="messianic_bereisheet_readings">Messianic Bereisheet Readings</string>
 </resources>

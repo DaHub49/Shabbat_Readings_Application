@@ -57,7 +57,7 @@ Example String array:
  * 3. https://bible.com/bible/3854/gen.1_1.1.CSEB24
  */
 private val TAG = "fragments -> ShabbatDetailFragment ->"
-private val FILENAME = "ffoz_berasheet_5785.txt"
+private val FILENAME = "messianic_berasheet_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private val TRANSLATIONINDEX = "translationIndex"
@@ -340,12 +340,23 @@ class ShabbatDetailFragment : Fragment() {
         var placeholderString: String = ""
         var replacementString: String = ""
 
+        //torahURL:
         val youVersionElements =
             mNewShabbatReading?.youVersion?.split("#")
         youVersionTorahURL = youVersionElements?.get(0) ?: "null"
         //Log.i(TAG, "assignYouVersionReadings -> youVersionTorahURL: $youVersionTorahURL")
-        youVersionHaftarahURL = youVersionElements?.get(1) ?: "null"
-        //Log.i(TAG, "assignYouVersionReadings -> youVersionHaftarahURL: $youVersionHaftarahURL")
+        //youVersionHaftarahURL =
+
+        //haftarahURL
+        //Ezekiel, "Eze", "Ezk"
+        placeholderString = youVersionElements?.get(1) ?: "null"
+        replacementString = if(placeholderString.contains("Eze")){
+            Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Eze'")
+            placeholderString.replace("Eze", "Ezk")
+        } else
+            placeholderString
+           youVersionHaftarahURL = replacementString
+            Log.i(TAG, "assignYouVersionReadings -> youVersionHaftarahURL: $youVersionHaftarahURL")
 
         /**
          * 3 Strings:  1: originalString [youVersionElements?.get(2)],
@@ -361,13 +372,19 @@ class ShabbatDetailFragment : Fragment() {
          * println(modifiedString) // Output: This is a test string with a new text to replace.
          */
 
+
+        //John, "Jhn"
         placeholderString = youVersionElements?.get(2) ?: "null"
         replacementString = if (placeholderString.contains("Joh")){
-            Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Joh'!")
+            Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Joh'")
             placeholderString.replace("Joh", "Jhn")
+        }
+        //Mark, "mrk"
+        else if (placeholderString.contains("Mar")){
+            Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Mar'!")
+            placeholderString.replace("Mar", "mrk")
         } else
             placeholderString
-
         youVersionNTURL = replacementString
         Log.i(TAG, "assignYouVersionReadings -> youVersionNTURL: $youVersionNTURL")
     }

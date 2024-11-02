@@ -96,16 +96,16 @@ public void onItemClick(int position){
         linksList = ArrayList<String>()
 
         //populate list:
+        linksList.add("https://www.youtube.com/@aaronshustofficial")
         linksList.add("https://www.youtube.com/@andrewhodkinson1")
         linksList.add("https://bethtikkun.com/category/media/")
         linksList.add("https://www.youtube.com/@bethtikkunmessianic")
         linksList.add("http://www.thecreationgospel.com/")
         linksList.add("https://www.youtube.com/@thecreationgospel")
-        linksList.add("https://ffoz.org/")
-        linksList.add("https://www.youtube.com/@firstfruitsofzion")
         linksList.add("https://firmisrael.org/")
         linksList.add("https://www.youtube.com/@FIRMisrael")
         linksList.add("https://www.youtube.com/@grantluton")
+        linksList.add("https://www.youtube.com/@JoshuaAaron")
         linksList.add("https://torahtodayministries.org/")
 
         links_recycler_view = view.findViewById(R.id.recyclerView)
