@@ -59,7 +59,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
             var index = 0;
             while (reader.readLine().also { mLine = it } != null) {
                 val tempElements = mLine!!.split(",")
-                parashaNames.add(tempElements[0])
+                parashaNames.add(tempElements[1] + ", " + tempElements[0])
                 //Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
                 index++
             }

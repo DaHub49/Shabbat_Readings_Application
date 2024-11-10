@@ -5,7 +5,7 @@ import za.co.howtogeek.shabbatreadingsapplication.R
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
+//import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,8 +58,8 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
         /**
          * Stll need to do:
          */
-        Log.i(TAG, "OnItemClickListener: position [argument]: $position")
-        Log.i(TAG, "OnItemClickListener -> [before edit] sharedPreferences.getInt(TRANSLATIONINDEX, 0): ${sharedPreferences.getInt(TRANSLATIONINDEX, 0)}")
+        //Log.i(TAG, "OnItemClickListener: position [argument]: $position")
+        //Log.i(TAG, "OnItemClickListener -> [before edit] sharedPreferences.getInt(TRANSLATIONINDEX, 0): ${sharedPreferences.getInt(TRANSLATIONINDEX, 0)}")
 
         val sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -68,7 +68,7 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
         editor.putInt(TRANSLATIONINDEX, position)
         editor.apply()
 
-        Log.i(TAG, "OnItemClickListener -> [after edit] sharedPreferences.getInt(TRANSLATIONINDEX, 0): ${sharedPreferences.getInt(TRANSLATIONINDEX, 0)}")
+        //Log.i(TAG, "OnItemClickListener -> [after edit] sharedPreferences.getInt(TRANSLATIONINDEX, 0): ${sharedPreferences.getInt(TRANSLATIONINDEX, 0)}")
 
         val fragmentManager = parentFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -83,7 +83,7 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
                 fragmentTransaction.replace(R.id.fragment_container, additionalReadingsDetailFragment)
             }
             else -> {
-                Log.i(TAG, "OnItemClickListener: Error selecting correct fragment")
+                //Log.i(TAG, "OnItemClickListener: Error selecting correct fragment")
             }
         }
         fragmentTransaction.commit()
@@ -148,7 +148,7 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i(TAG, "onViewCreated: [called]")
+        //Log.i(TAG, "onViewCreated: [called]")
     }
 
 }

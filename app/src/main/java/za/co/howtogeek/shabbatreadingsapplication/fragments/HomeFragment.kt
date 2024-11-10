@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import za.co.howtogeek.shabbatreadingsapplication.R
 import za.co.howtogeek.shabbatreadingsapplication.readings5785.ReadingList_Fragment
 
-private val TAG = "za.co.howtogeek.shabbatreadingsapplication.fragments -> HomeFragment -> "
+//private val TAG = "za.co.howtogeek.shabbatreadingsapplication.fragments -> HomeFragment -> "
 
 class HomeFragment : Fragment() {
 

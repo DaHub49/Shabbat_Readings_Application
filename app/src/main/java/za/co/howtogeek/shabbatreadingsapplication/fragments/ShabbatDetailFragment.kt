@@ -172,7 +172,7 @@ class ShabbatDetailFragment : Fragment() {
 
         val shabbat_reading_set = view.findViewById<TextView>(R.id.shabbat_reading_set)
         val readingSet = mNewShabbatReading!!.readingSet
-        shabbat_reading_set.setText(R.string.first_fruits_of_zion)
+        shabbat_reading_set.setText(R.string.messianic_reading_cycle)
 
         val gregorianDateTextView = view.findViewById<TextView>(R.id.gregorianDateTextView)
         gregorianDateTextView.setText(mNewShabbatReading!!.gregorianDate)

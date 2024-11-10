@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+//import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,9 +37,9 @@ public void onItemClick(int position){
     override fun onItemClick(position: Int) {
 
         // Handle item click
-        Log.i(TAG, "onItemClick: [called]")
+        //Log.i(TAG, "onItemClick: [called]")
         val linkName = linksList[position]
-        Log.i(TAG, "onItemClick -> linkName: $linkName")
+        //Log.i(TAG, "onItemClick -> linkName: $linkName")
                 // Handle item click
 
         openLinkInBrowser(requireContext(), linksList[position])

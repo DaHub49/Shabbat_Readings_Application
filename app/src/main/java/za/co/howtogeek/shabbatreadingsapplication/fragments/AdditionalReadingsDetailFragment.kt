@@ -319,15 +319,24 @@ class AdditionalReadingsDetailFragment : Fragment() {
          */
         val additionalReadings1TextView = view.findViewById<TextView>(R.id.additionalReadings1TextView)
         additionalReadings1TextView.isClickable = true
+        if (additionalReadings1.equals("null", ignoreCase = true)) {
+            additionalReadings1TextView.isEnabled = false
+            //Log.i(TAG, "onViewCreated: additionalReadings2 [disabled]")
+        } else //Log.i(TAG, "onViewCreated: additionalReadings1TextView.ISNT_Enabled")
+            additionalReadings1TextView.text = additionalReadings1
+
+        /*val additionalReadings1TextView = view.findViewById<TextView>(R.id.additionalReadings1TextView)
+        additionalReadings1TextView.isClickable = true
         if (additionalReadings1TextView.isEnabled) {
             //Log.i(TAG, "onViewCreated: additionalReadings1TextView.isEnabled")
         } else //Log.i(TAG, "onViewCreated: additionalReadings1TextView.ISNT_Enabled")
         additionalReadings1TextView.text = additionalReadings1
-
         if (additionalReadings1.equals("null", ignoreCase = true)) {
             additionalReadings1TextView.isEnabled = false
             //Log.i(TAG, "onViewCreated: additionalReadings1 [disabled]")
         }// else additionalReadings1TextView.text = additionalReadings1
+
+         */
 
         additionalReadings1TextView.setOnClickListener {
             if (youVersionRadioButtonSelected) {

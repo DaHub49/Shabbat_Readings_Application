@@ -17,7 +17,7 @@ class FileReader {
                 }
                 reader.close()
             } catch (e: Exception) {
-                Log.e("FileReader", "Error reading file: ${e.message}", e)
+                //Log.e("FileReader", "Error reading file: ${e.message}", e)
             }
             return parashaNames
         }

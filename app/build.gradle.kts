@@ -11,8 +11,8 @@ android {
         applicationId = "za.co.howtogeek.shabbatreadingsapplication"
         minSdk = 29
         targetSdk = 35
-        versionCode = 44
-        versionName = "Berasheet 5785"
+        versionCode = 45
+        versionName = "Update of Berasheet 5785"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
