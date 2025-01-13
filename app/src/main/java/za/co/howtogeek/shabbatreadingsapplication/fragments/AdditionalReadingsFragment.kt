@@ -15,8 +15,8 @@ import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-private val TAG ="fragments -> AdditionalReadingsFragment -> "
-private val FILENAME = "berasheet_additional_parashat_readings_with_links_commas.txt"
+//private val TAG ="fragments -> AdditionalReadingsFragment -> "
+private val FILENAME = "shemot_additional_readings_with_links.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition" //The same SharedPreference variable can be used in both called
 //fragments, as it will be changed before every detailed fragment.
@@ -63,10 +63,10 @@ class AdditionalReadingsFragment : Fragment(), ShabbatReadingAdapter.OnItemClick
             val reader = BufferedReader(InputStreamReader(inputStream))
 
             //new:
-            var index = 0;
+            var index = 0
             while (reader.readLine().also { mLine = it } != null) {
-                //Bereishit[0]; Joshua[1]; Psalms 1-8[2]; Matthew 1-4[3]; Romans 1-3[4];
-                // Jos.1.1#Psa.1.1#Mat.1.1#Rom.1.1[5]; Jos_1_1#Psa_1_1#Mat_1_1#Rom_1_1[6] -7-elements
+                // Shemot[0], Exodus 1:1 - 6:1[1], 2 Samuel 15-21[2],
+                // Psalms 90-96[3], Mark 10-12[4], 2 Corinthians 7-9[5] -6-elements
                 val tempElements = mLine!!.split(",")
                 parashaNames.add(tempElements[0])
                 //Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
@@ -78,9 +78,9 @@ class AdditionalReadingsFragment : Fragment(), ShabbatReadingAdapter.OnItemClick
         }
 
         //Output arrayList
-        for (line in parashaNames) {
+        //for (line in parashaNames) {
             //Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
-        }
+        //}
 
         // RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -95,7 +95,7 @@ class AdditionalReadingsFragment : Fragment(), ShabbatReadingAdapter.OnItemClick
     override fun onItemClick(position: Int) {
         // Handle item click
         //Log.i(TAG, "onItemClick: [called]")
-        val parashaName = parashaNames[position]
+        //val parashaName = parashaNames[position]
         //Log.i(TAG, "onItemClick -> parashaName: $parashaName")
 
         //update SharedPreferences [27/10/24]:

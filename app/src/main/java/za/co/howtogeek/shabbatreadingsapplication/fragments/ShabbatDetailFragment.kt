@@ -55,8 +55,8 @@ Example String array:
  * 2. https://bible.com/bible/100/rom.12.1.NASB1995
  * 3. https://bible.com/bible/3854/gen.1_1.1.CSEB24
  */
-private val TAG = "fragments -> ShabbatDetailFragment ->"
-private val FILENAME = "messianic_berasheet_5785.txt"
+//private val TAG = "fragments -> ShabbatDetailFragment ->"
+private val FILENAME = "messianic_shemot_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private val TRANSLATIONINDEX = "translationIndex"
@@ -65,8 +65,8 @@ class ShabbatDetailFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    private var fullMySwordReadings: String = "null"
-    private var fullYouVersionReadings: String? = null
+    //private var fullMySwordReadings: String = "null"
+    //private var fullYouVersionReadings: String? = null
 
     //The text required for the intent to open the MySword Bible:
     private val mySwordPretext = "http://mysword.info/b?r="
@@ -145,6 +145,9 @@ class ShabbatDetailFragment : Fragment() {
         val parashaElements = parashaLine!!.split(",")
         parashaName = parashaElements.get(0)
         mNewShabbatReading = ShabbatReading(
+            //Shemot[0], 18 Jan. 2025[1], 18 Tevet[2], Exo. 1:1–6:1[3], Isa. 27:6–28:13;29:22–23[4],
+            // Mt. 2:1–12[5], Exo.1.1–6.1#Isa.27.6–28.13#Mat.2.1–12[6],
+            // Exo_1_1–6_1#Isa_27_6–28_13#Mat_2_1–12[7]
             id = parashaPosition,
             readingSet = 1,
             parashaName = parashaElements.get(0),
@@ -171,7 +174,7 @@ class ShabbatDetailFragment : Fragment() {
         shabbat_title_text.setText(mNewShabbatReading!!.parashaName)
 
         val shabbat_reading_set = view.findViewById<TextView>(R.id.shabbat_reading_set)
-        val readingSet = mNewShabbatReading!!.readingSet
+        //val readingSet = mNewShabbatReading!!.readingSet
         shabbat_reading_set.setText(R.string.messianic_reading_cycle)
 
         val gregorianDateTextView = view.findViewById<TextView>(R.id.gregorianDateTextView)

@@ -57,6 +57,7 @@
     <string name="youversion_southern_ndebele">Southern Ndebele</string>
     <string name="first_fruits_of_zion">First Fruits of Zion</string>
     <string name="additional_readings">Additional Readings</string>
+    <string name="parasha_page">Parsha Page</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -161,7 +162,7 @@
     <string name="gospels_placeholder">Gospels</string>
     <string name="letters_rt_writings_placeholder">Letters/RT Writings</string>
     <string name="reading_set">reading set</string>
-    <string name="reading_list_fragment_template">Reading List <Fragment></Fragment></string>
+    <string name="reading_list_fragment_template">Reading List</string>
     <string name="first_fruit_of_zion">First Fruit of Zion</string>
     <string name="title_activity_settings">SettingsActivity</string>
 

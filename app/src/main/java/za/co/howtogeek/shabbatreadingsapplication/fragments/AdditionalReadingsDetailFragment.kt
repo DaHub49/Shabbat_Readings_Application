@@ -15,8 +15,8 @@ import android.widget.TextView
 import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.IOException
 
-private val TAG = "fragments -> AdditionalReadingsDetailFragment -> "
-private val FILENAME = "berasheet_additional_parashat_readings_with_links_commas.txt"
+//private val TAG = "fragments -> AdditionalReadingsDetailFragment -> "
+private val FILENAME = "shemot_additional_readings_with_links.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private val TRANSLATIONINDEX = "translationIndex"
@@ -72,7 +72,8 @@ class AdditionalReadingsDetailFragment : Fragment() {
         }
         //Log.i(TAG, "onCreate: parashaLine [after importReading()]: $parashaLine")
 
-        //Bereishit,Joshua,Psalms 1-8,Matthew 1-4,Romans 1-3,Jos.1.1#Psa.1.1#Mat.1.1#Rom.1.1,Jos_1_1#Psa_1_1#Mat_1_1#Rom_1_1
+        // Shemot[0], 2 Samuel 15-21[1], Psalms 90-96[2], Mark 10-12[3], 2 Corinthians 7-9[4],
+        // 2Sa.15.1#Psa.90.1#Mar.10.1#2Co.7.1[5], 2Sa_15_1#Psa_90_1#Mar_10_1#2Co_1_1[6] -7-elements
 
         val parashaElements = parashaLine!!.split(",")
         parashaName = parashaElements.get(0)
@@ -279,7 +280,7 @@ class AdditionalReadingsDetailFragment : Fragment() {
         val bibleTranslationPreferencesTextView = view.findViewById<TextView>(R.id.additionalReadingsBibleTranslationPreferences)
 
         bibleTranslationPreferencesTextView.setOnClickListener {
-            var youVersionTranslationFragment: YouVersionTranslationFragment = YouVersionTranslationFragment()
+            val youVersionTranslationFragment: YouVersionTranslationFragment = YouVersionTranslationFragment()
             var bundle = Bundle()
             bundle.putInt("callerFragment", 1) // 0 for ShabbatDetailFragment, 1 for AdditionalReaddingsDetailFragment
             youVersionTranslationFragment.setArguments(bundle) // pass the bundle to the fragmentarguments

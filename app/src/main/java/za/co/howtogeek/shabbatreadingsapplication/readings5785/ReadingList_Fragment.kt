@@ -17,8 +17,8 @@ import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-private val TAG = "readings5785 -> ReadingListFragment -> "
-private val FILENAME = "messianic_berasheet_5785.txt"
+//private val TAG = "readings5785 -> ReadingListFragment -> "
+private val FILENAME = "messianic_shemot_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private const val PARENTFRAGMENT = 1 //0 for ReadingList_Fragment, 1 for AdditionalReadingsFragment
@@ -56,9 +56,13 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
             val reader = BufferedReader(InputStreamReader(inputStream))
 
             //new:
-            var index = 0;
+            var index = 0
             while (reader.readLine().also { mLine = it } != null) {
                 val tempElements = mLine!!.split(",")
+                //Shemot[0], 18 Jan. 2025[1], 18 Tevet[2], Exo. 1:1–6:1[3],
+                //Isa. 27:6–28:13;29:22–23[4], Mt. 2:1–12[5],
+                // Exo.1.1–6.1#Isa.27.6–28.13#Mat.2.1–12[6],
+                // Exo_1_1–6_1#Isa_27_6–28_13#Mat_2_1–12[7]
                 parashaNames.add(tempElements[1] + ", " + tempElements[0])
                 //Log.i(TAG, "readFFOZFileSaveToArrayList: parashaNames.get($index): " + parashaNames.get(index))
                 index++
@@ -69,9 +73,9 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         }
 
         //Output arrayList
-        for (line in parashaNames) {
+        //for (line in parashaNames) {
             //Log.i(TAG, "ReadingListFragment -> readTextFile -> for: " + line)
-        }
+        //}
 
         // RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -90,7 +94,7 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
     override fun onItemClick(position: Int) {
         // Handle item click
         //Log.i(TAG, "onItemClick: [called]")
-        val parashaName = parashaNames[position]
+        //val parashaName = parashaNames[position]
         //Log.i(TAG, "onItemClick -> parashaName: $parashaName")
 
         //update SharedPreferences [27/10/24]:
@@ -101,10 +105,10 @@ class ReadingList_Fragment : Fragment(), ShabbatReadingAdapter.OnItemClickListen
         editor.commit()
 
         val shabbatDetailFragment = ShabbatDetailFragment()
-        val bundle = Bundle()
+        //var bundle = Bundle()
 
         //bundle.putInt("parashaPosition", position)
-        shabbatDetailFragment.arguments = bundle
+        //shabbatDetailFragment.arguments = bundle
         val fragmentManager = requireActivity().supportFragmentManager
         fragmentManager.beginTransaction()
             .replace(R.id.fragment_container, shabbatDetailFragment)
