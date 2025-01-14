@@ -6,4 +6,21 @@
     </style>
 
     <style name="Theme.ShabbatReadingsApplication" parent="Base.Theme.ShabbatReadingsApplication" />
+    <style name="TextViewButton" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@android:color/secondary_text_light</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- <style name="TextViewButton" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@drawable/textview_background</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style> -->
 </resources>

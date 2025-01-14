@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // First Fruits of Zion Torah Portions cycles:
-        view.findViewById<TextView>(R.id.ffoz_launcher).setOnClickListener {
+        view.findViewById<TextView>(R.id.torah_readings_launcher).setOnClickListener {
             //Log.i(TAG, "onViewCreated: ffozLauncher: clicked")
 
             val fragmentManager = requireActivity().supportFragmentManager

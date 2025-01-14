@@ -156,7 +156,13 @@
     </string-array>
 
     <string name="parsha_name_placeholder">[parsha name]</string>
-    <string name="additional_readings_placeholder">Additional\nReadings</string>
+    <string name="torah_readings_placeholder">Torah\nReadings</string>
+    <string name="haftarah_readings_placeholder">Torah\nReadings</string>
+    <string name="britchadashah_readings_placeholder">Brit\nChadashah\nReadings</string>
+    <string name="prophets_additional_readings_placeholder">Prophets\nAdditional\nReadings</string>
+    <string name="writings_additional_readings_placeholder">Writings\nAdditional\nReadings</string>
+    <string name="gospels_additional_readings_placeholder">Gospel\nAdditional\nReadings</string>
+    <string name="letters_additional_readings_placeholder">Letters\nAdditional\nReadings</string>
     <string name="prophets_placeholder">Prophets</string>
     <string name="writings_placeholder">Writings</string>
     <string name="gospels_placeholder">Gospels</string>
@@ -184,4 +190,5 @@
     <string name="text_placeholder">[text]</string>
     <string name="messianic_reading_cycle">Messianic Reading Cycle</string>
     <string name="messianic_bereisheet_readings">Messianic Bereisheet Readings</string>
+    <string name="shemot_torah_readings">Shemot Readings</string>
 </resources>

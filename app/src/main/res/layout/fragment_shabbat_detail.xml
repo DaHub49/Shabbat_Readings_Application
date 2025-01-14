@@ -140,7 +140,7 @@
             android:focusable="true"
             android:maxLines="4"
             android:padding="8dp"
-            android:text="@string/additional_readings_placeholder"
+            android:text="@string/torah_readings_placeholder"
             android:textAlignment="center" />
 
         <TextView
@@ -152,7 +152,7 @@
             android:focusable="true"
             android:maxLines="3"
             android:padding="8dp"
-            android:text="@string/additional_readings_placeholder"
+            android:text="@string/haftarah_readings_placeholder"
             android:textAlignment="center" />
 
         <TextView
@@ -164,7 +164,7 @@
             android:focusable="true"
             android:maxLines="4"
             android:padding="8dp"
-            android:text="@string/additional_readings_placeholder"
+            android:text="@string/britchadashah_readings_placeholder"
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -178,23 +178,20 @@
         android:padding="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <RadioButton
             android:id="@+id/mySwordRadioButton"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="15dp"
             android:text="@string/my_sword_bible" />
 
         <RadioButton
             android:id="@+id/youVersionRadioButton"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="15dp"
             android:text="@string/youversion_bible" />
     </RadioGroup>
@@ -202,11 +199,12 @@
     <TextView
         android:id="@+id/bibleTranslationPreferencesTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
         android:text="@string/bible_choice"
         android:layout_margin="12dp"
         android:padding="8dp"
-        android:background="@drawable/button_default"
+        android:background="@color/colorAccent"
         android:textColor="@android:color/secondary_text_light"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

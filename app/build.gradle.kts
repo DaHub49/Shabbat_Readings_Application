@@ -11,7 +11,7 @@ android {
         applicationId = "za.co.howtogeek.shabbatreadingsapplication"
         minSdk = 22
         targetSdk = 35
-        versionCode = 46
+        versionCode = 47
         versionName = "Shemot 5785"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

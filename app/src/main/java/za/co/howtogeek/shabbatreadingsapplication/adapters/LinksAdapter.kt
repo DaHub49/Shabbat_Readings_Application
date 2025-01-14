@@ -39,7 +39,7 @@ class LinksAdapter(data: ArrayList<String>, context: Context) :
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LinksViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_view_bookmark, parent, false)
+            .inflate(R.layout.gemini_card_view_bookmark, parent, false)
         val linksViewHolder = LinksViewHolder(view)
         return linksViewHolder
     }

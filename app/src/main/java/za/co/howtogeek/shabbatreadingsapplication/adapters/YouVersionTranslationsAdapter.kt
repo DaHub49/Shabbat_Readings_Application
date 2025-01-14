@@ -39,7 +39,7 @@ class YouVersionTranslationsAdapter(
     /* Creates and inflates view and return ViewHolder. */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_view_bookmark, parent, false)
+            .inflate(R.layout.gemini_card_view_bookmark, parent, false)
 
         return ViewHolder(view, listener)
     }
