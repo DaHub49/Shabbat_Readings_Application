@@ -130,6 +130,12 @@
         <item>.SND12</item>
     </string-array>
 
+    <string-array name="youversion_arabic_sab_translation">
+        <item>Arabic SAB</item>
+        <item>https://www.bible.com/bible/153/</item>
+        <item>.SAB</item>
+    </string-array>
+
     <string-array name="youversion_translations">
         <item>English TS2009</item>
         <item>English NASB</item>
@@ -140,6 +146,7 @@
         <item>Northern Sotho</item>
         <item>Tsonga</item>
         <item>Southern Ndebele</item>
+        <item>Sharif Arabic Bible</item>
     </string-array>
 
     <string-array name="youversion_translations_key">
@@ -152,6 +159,7 @@
         <item>Northern Sotho</item>
         <item>Tsonga</item>
         <item>Southern Ndebele</item>
+        <item>Arabic SAB</item>
 
     </string-array>
 

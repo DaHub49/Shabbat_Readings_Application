@@ -47,6 +47,7 @@ Example String array:
  * 6: Northern Sotho youversion_northern_sotho_translations
  * 7: Tsonga youversion_tsonga_translations
  * 8: Southern Ndebele youversion_southern_ndebele_translations
+ * 9: Arabic SAB
  */
 
 /**
@@ -54,6 +55,7 @@ Example String array:
  * 1. https://play.google.com/store/apps/details?id=com.sirma.mobile.bible.android
  * 2. https://bible.com/bible/100/rom.12.1.NASB1995
  * 3. https://bible.com/bible/3854/gen.1_1.1.CSEB24
+ * 4. https://bible.com/bible/153/GEN.1.SAB
  */
 //private val TAG = "fragments -> ShabbatDetailFragment ->"
 private val FILENAME = "messianic_shemot_5785.txt"
@@ -485,6 +487,12 @@ class ShabbatDetailFragment : Fragment() {
                 val youVersionSouthernNdebeleArray = resources.getStringArray(R.array.youversion_southern_ndebele_translations)
                 youVersionTranslationPreText = youVersionSouthernNdebeleArray[1]
                 youVersionTranslationEndText = youVersionSouthernNdebeleArray[2]
+            }
+
+            9 -> {
+                val arabicSabArray = resources.getStringArray(R.array.youversion_arabic_sab_translation)
+                youVersionTranslationPreText = arabicSabArray[1]
+                youVersionTranslationEndText = arabicSabArray[2]
             }
 
             else -> {

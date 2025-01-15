@@ -198,6 +198,12 @@ class AdditionalReadingsDetailFragment : Fragment() {
                 youVersionTranslationEndText = youVersionSouthernNdebeleArray[2]
             }
 
+            9 -> {
+                val youVersionArabicSabArray = resources.getStringArray(R.array.youversion_arabic_sab_translation)
+                youVersionTranslationPreText = youVersionArabicSabArray[1]
+                youVersionTranslationEndText = youVersionArabicSabArray[2]
+            }
+
             else -> {
                 //Log.i(TAG, "loadTranslation: selectedBibleTranslation: $selectedBibleTranslation [else]")
                 val youVersionTS2009Array = resources.getStringArray(R.array.youversion_ts2009_translations)
@@ -216,6 +222,67 @@ class AdditionalReadingsDetailFragment : Fragment() {
     }
 
     fun assignYouVersionReadings() {
+        //Log.i(TAG, "assignYouVersionReadings: [called]")
+        val youVersionElements = allYouVersionLinks?.split("#")
+        //Log.i(TAG, "assignYouVersionReadings: allYouVersionLinks: $allYouVersionLinks")
+        youVersionAdditionalReadings1 = youVersionElements?.get(0) ?: "null"
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings1: $youVersionAdditionalReadings1")
+        youVersionAdditionalReadings2 = youVersionElements?.get(1) ?: "null"
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings2: $youVersionAdditionalReadings2")
+        youVersionAdditionalReadings3 = youVersionElements?.get(2) ?: "null"
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings3: $youVersionAdditionalReadings3")
+        youVersionAdditionalReadings4 = youVersionElements?.get(3) ?: "null"
+        //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings4: $youVersionAdditionalReadings4")
+
+
+
+        var placeholderString: String = ""
+        var replacementString: String = ""
+
+        /*torahURL:
+        val youVersionElements =
+            mNewShabbatReading?.youVersion?.split("#")
+        youVersionTorahURL = youVersionElements?.get(0) ?: "null"
+        //Log.i(TAG, "assignYouVersionReadings -> youVersionTorahURL: $youVersionTorahURL")
+        //youVersionHaftarahURL =
+
+         */
+
+        /**
+         * mySwordAdditionalReadings4
+         * youVersionAdditionalReadings1
+         */
+
+        //additionalReadings1
+        //Ezekiel, "Eze", "Ezk"
+        placeholderString = youVersionElements?.get(0) ?: "null"
+        replacementString = if(placeholderString.contains("Eze")){
+            //Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Eze'")
+            placeholderString.replace("Eze", "Ezk")
+        } else
+            placeholderString
+        youVersionAdditionalReadings1 = replacementString
+
+
+        //additionalReadings3:
+
+        //John, "Jhn"
+        placeholderString = youVersionElements?.get(2) ?: "null"
+        replacementString = if (placeholderString.contains("Joh")){
+            //Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Joh'")
+            placeholderString.replace("Joh", "Jhn")
+        }
+        //Mark, "mrk"
+        else if (placeholderString.contains("Mar")){
+            //Log.i(TAG, "assignYouVersionReadings: CONTAINS 'Mar'!")
+            placeholderString.replace("Mar", "mrk")
+        } else
+            placeholderString
+        youVersionAdditionalReadings3 = replacementString
+        //Log.i(TAG, "assignYouVersionReadings -> youVersionNTURL: $youVersionNTURL")
+    }
+
+    /*fun assignYouVersionReadings() {
         //Log.i(TAG, "assignYouVersionReadings: [called]")
           
                 /* mySwordAdditionalReadings1 = ""
@@ -240,6 +307,7 @@ class AdditionalReadingsDetailFragment : Fragment() {
         youVersionAdditionalReadings4 = youVersionElements?.get(3) ?: "null"
         //Log.i(TAG, "assignYouVersionReadings: youVersionAdditionalReadings4: $youVersionAdditionalReadings4")
     }
+     */
 
     fun assignMySwordReadings() {
         //Log.i(TAG, "assignMySwordReadings: [called]")
