@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import za.co.howtogeek.shabbatreadingsapplication.adapters.ShabbatReadingAdapter
 import za.co.howtogeek.shabbatreadingsapplication.R
 
-private val TAG = "LinksFragment -> "
+//private val TAG = "LinksFragment -> "
 
 class LinksFragment : Fragment(), ShabbatReadingAdapter.OnItemClickListener  { /*@Override
 public void onItemClick(int position){
@@ -38,7 +38,7 @@ public void onItemClick(int position){
 
         // Handle item click
         //Log.i(TAG, "onItemClick: [called]")
-        val linkName = linksList[position]
+        //val linkName = linksList[position]
         //Log.i(TAG, "onItemClick -> linkName: $linkName")
                 // Handle item click
 
@@ -66,6 +66,10 @@ public void onItemClick(int position){
      * "https://www.youtube.com/@FIRMisrael"
      * "https://www.youtube.com/@grantluton"
      * "https://torahtodayministries.org/"
+     *
+     * The Israel Guys:
+     * https://theisraelguys.com/
+     * https://www.youtube.com/theisraelguys
      */
 
     fun openLinkInBrowser(context: Context, url: String) {
@@ -89,7 +93,7 @@ public void onItemClick(int position){
         val view = inflater.inflate(R.layout.fragment_reading_list_template, container, false)
 
         val readingListFragmentTitleText: TextView = view.findViewById(R.id.reading_list_fragment_title_text)
-        readingListFragmentTitleText.text = "Links:"
+        readingListFragmentTitleText.text = getString(R.string.links)
 
         linksList = ArrayList<String>()
 
@@ -103,7 +107,9 @@ public void onItemClick(int position){
         linksList.add("https://firmisrael.org/")
         linksList.add("https://www.youtube.com/@FIRMisrael")
         linksList.add("https://www.youtube.com/@grantluton")
+        linksList.add("https://www.youtube.com/theisraelguys")
         linksList.add("https://www.youtube.com/@JoshuaAaron")
+        linksList.add("https://theisraelguys.com/")
         linksList.add("https://torahtodayministries.org/")
 
         links_recycler_view = view.findViewById(R.id.recyclerView)

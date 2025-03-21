@@ -21,7 +21,7 @@ import za.co.howtogeek.shabbatreadingsapplication.fragments.AdditionalReadingsDe
  * translation and save to SharedPreferences.
  *
  * Creation date: 16/10/2024 @08:51
- * Update date: 20/10/2024 @06:30: Goal -> To add SharedPreferences to the Bible Settings Fragment
+ * Update date: 20/03/2025
  *
  * translationIndex
  *
@@ -34,9 +34,11 @@ import za.co.howtogeek.shabbatreadingsapplication.fragments.AdditionalReadingsDe
  * 6: Northern Sotho
  * 7: Tsonga
  * 8: Southern Ndebele
+ * 9: SAB
+ * 10: SCH2000
  *
  */
-private val TAG = "settings -> YouVersionTranslationFragment -> "
+//private val TAG = "settings -> YouVersionTranslationFragment -> "
 private val PREFERENCES = "preferences"
 private val TRANSLATIONINDEX = "translationIndex"
 
@@ -48,11 +50,11 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
     private var callerFragment: Int = -1
     // Initialize parashaNames
 
-    private lateinit var adapter: YouVersionTranslationsAdapter
+    //private lateinit var adapter: YouVersionTranslationsAdapter
 
     //SharedPreferences:
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
+    //private lateinit var editor: SharedPreferences.Editor
 
     override fun OnItemClickListener(position: Int) {
         /**
@@ -119,10 +121,10 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
         sharedPreferences = requireActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
 
         // Load saved integer
-        val bibleTranslationInt = sharedPreferences.getInt(TRANSLATIONINDEX, 0)
+        //val bibleTranslationInt = sharedPreferences.getInt(TRANSLATIONINDEX, 0)
 
         //0. HeaderTextView:
-        var reading_list_fragment_title_text: TextView = view.findViewById(R.id.you_version_translation_fragment_title)
+        //var reading_list_fragment_title_text: TextView = view.findViewById(R.id.you_version_translation_fragment_title)
 
         //1. RecyclerView:
         translation_recycler_view = view.findViewById<RecyclerView>(R.id.translation_recycler_view)
@@ -138,12 +140,13 @@ class YouVersionTranslationFragment : Fragment(), YouVersionTranslationsAdapter.
 
     }
 
-    fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+    /*fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == "pref_bible_translation") {
             val selectedTranslation = sharedPreferences?.getString(key, "youversion_english") ?: "youversion_english"
             // Store or use the selectedTranslation value as needed
         }
     }
+     */
     //populate the views now that the layout has been inflated:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

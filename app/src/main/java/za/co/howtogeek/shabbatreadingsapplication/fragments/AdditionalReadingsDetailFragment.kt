@@ -16,7 +16,7 @@ import za.co.howtogeek.shabbatreadingsapplication.R
 import java.io.IOException
 
 //private val TAG = "fragments -> AdditionalReadingsDetailFragment -> "
-private val FILENAME = "shemot_additional_readings_with_links.txt"
+private val FILENAME = "vayikra_additional_parashat_readings_with_links_commas.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private val TRANSLATIONINDEX = "translationIndex"

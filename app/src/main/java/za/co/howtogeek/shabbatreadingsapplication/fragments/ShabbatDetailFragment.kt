@@ -58,7 +58,7 @@ Example String array:
  * 4. https://bible.com/bible/153/GEN.1.SAB
  */
 //private val TAG = "fragments -> ShabbatDetailFragment ->"
-private val FILENAME = "messianic_shemot_5785.txt"
+private val FILENAME = "messianic_vayikra_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private val TRANSLATIONINDEX = "translationIndex"
@@ -493,6 +493,12 @@ class ShabbatDetailFragment : Fragment() {
                 val arabicSabArray = resources.getStringArray(R.array.youversion_arabic_sab_translation)
                 youVersionTranslationPreText = arabicSabArray[1]
                 youVersionTranslationEndText = arabicSabArray[2]
+            }
+
+            10 -> {
+                val germanSCH2000Array = resources.getStringArray(R.array.youversion_german_schlacter_bible_translation)
+                youVersionTranslationPreText = germanSCH2000Array[1]
+                youVersionTranslationEndText = germanSCH2000Array[2]
             }
 
             else -> {

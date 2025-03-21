@@ -136,6 +136,13 @@
         <item>.SAB</item>
     </string-array>
 
+    <!-- https://www.bible.com/bible/157/LEV.1.SCH2000 -->
+    <string-array name="youversion_german_schlacter_bible_translation">
+        <item>Schlachter 2000 (German)</item>
+        <item>https://www.bible.com/bible/157/</item>
+        <item>.SCH2000</item>
+    </string-array>
+
     <string-array name="youversion_translations">
         <item>English TS2009</item>
         <item>English NASB</item>
@@ -147,6 +154,7 @@
         <item>Tsonga</item>
         <item>Southern Ndebele</item>
         <item>Sharif Arabic Bible</item>
+        <item>Schlachter 2000 (German)</item>
     </string-array>
 
     <string-array name="youversion_translations_key">
@@ -199,4 +207,5 @@
     <string name="messianic_reading_cycle">Messianic Reading Cycle</string>
     <string name="messianic_bereisheet_readings">Messianic Bereisheet Readings</string>
     <string name="shemot_torah_readings">Shemot Readings</string>
+    <string name="links">Links:</string>
 </resources>
