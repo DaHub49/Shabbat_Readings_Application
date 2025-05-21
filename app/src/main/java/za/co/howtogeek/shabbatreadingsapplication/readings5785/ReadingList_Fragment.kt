@@ -18,7 +18,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 //private val TAG = "readings5785 -> ReadingListFragment -> "
-private val FILENAME = "messianic_vayikra_5785.txt"
+private val FILENAME = "bamidbar_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private const val PARENTFRAGMENT = 1 //0 for ReadingList_Fragment, 1 for AdditionalReadingsFragment

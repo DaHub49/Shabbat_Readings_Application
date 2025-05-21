@@ -209,4 +209,12 @@
     <string name="shemot_torah_readings">Shemot Readings</string>
     <string name="vayikra_torah_readings">Vayikra Readings</string>
     <string name="links">Links:</string>
+    <string name="gregorian_date">Gregorian Date:</string>
+    <string name="biblical_date">Biblical Date:</string>
+    <string name="gregorian_date_placeholder">[Gregorian date]</string>
+    <string name="biblical_date_placeholder">[Biblical date]</string>
+    <string name="parsha_name">[parsha name]</string>
+    <string name="torah">\nTorah</string>
+    <string name="haftarah">\nHaftarah</string>
+    <string name="brit_chadashah">Brit\nChadashah</string>
 </resources>

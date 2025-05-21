@@ -18,7 +18,7 @@ class ShabbatReadingAdapter(
     private val listener: OnItemClickListener
 ): RecyclerView.Adapter<ShabbatReadingAdapter.ViewHolder>() {
 
-    //Step 1: Define OnItemClickListener interface (in adapter) for onclicks:
+    //Step 1: Define OnItemClickListener interface (in adapter) for onClicks:
     interface OnItemClickListener{
         fun onItemClick(position: Int)
 

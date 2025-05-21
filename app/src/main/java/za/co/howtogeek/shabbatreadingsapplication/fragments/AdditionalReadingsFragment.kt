@@ -16,7 +16,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 //private val TAG ="fragments -> AdditionalReadingsFragment -> "
-private val FILENAME = "vayikra_additional_parashat_readings_with_links_commas.txt"
+private val FILENAME = "bamidbar_additional_readings_5785_with_links.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition" //The same SharedPreference variable can be used in both called
 //fragments, as it will be changed before every detailed fragment.

@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background_color">#CCCCCD</color>
-    <color name="text_colour">#FFFDD0</color>
+    <color name="background_color">#BAB5B5</color>
     <color name="purple_200">#FFBB86FC</color>
+    <color name="text_colour">#282823</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -13,9 +13,9 @@
     <color name="colorPrimaryDark">#024C8F</color>
     <color name="colorAccent">#88C2F5</color>
     <color name="black_overlay">#66000000</color>
-    <color name="my_light_primary">#BB86FC</color> <!-- Or a different primary for dark -->
+    <color name="my_light_primary">#7105F6</color> <!-- Or a different primary for dark -->
     <color name="my_light_primary_variant">#3700B3</color> <!-- Or a different variant for dark -->
     <color name="my_light_on_primary">#000000</color>
     <color name="background">#121212</color> <!-- Common dark theme background -->
-    <color name="textColor">#1B1B1B</color>
+    <color name="textColor">#000000</color>
 </resources>
