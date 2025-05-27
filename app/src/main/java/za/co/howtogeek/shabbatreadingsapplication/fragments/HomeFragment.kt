@@ -13,7 +13,7 @@ import za.co.howtogeek.shabbatreadingsapplication.readings5785.ReadingList_Fragm
 
 class HomeFragment : Fragment() {
 
-    private var aboutOrBibleHelp: Char = 'a'
+    //private var aboutOrBibleHelp: Char = 'a'
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +40,8 @@ class HomeFragment : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
 
-            val readingList_Fragment = ReadingList_Fragment()
-            fragmentTransaction.replace(R.id.fragment_container, readingList_Fragment)
+            val readingListFragment = ReadingList_Fragment()
+            fragmentTransaction.replace(R.id.fragment_container, readingListFragment)
             fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
 
             fragmentTransaction.commit()
@@ -57,7 +57,6 @@ class HomeFragment : Fragment() {
             val additionalReadingsFragment = AdditionalReadingsFragment()
             fragmentTransaction.replace(R.id.fragment_container, additionalReadingsFragment)
             fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
-
             fragmentTransaction.commit()
         }
 
@@ -123,14 +122,15 @@ class HomeFragment : Fragment() {
         }
 
 
-        val mysword_bible_setup = view.findViewById<TextView>(R.id.mysword_bible_setup)
-        mysword_bible_setup.isEnabled = false
-
-
-        /*mysword_bible_setup.setOnClickListener {
-            // Handle button 2 click
-            Toast.makeText(activity, "mysword_bible_setup clicked", Toast.LENGTH_SHORT).show()
-        }*/
+        //MySword Bible setup:
+        view.findViewById<TextView>(R.id.mysword_bible_setup).setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val mySwordSetupFragment = MySwordSetupFragment()
+            fragmentTransaction.replace(R.id.fragment_container, mySwordSetupFragment)
+            fragmentTransaction.addToBackStack(null) // Optional: Add to back stack
+            fragmentTransaction.commit()
+        }
 
         // Set click listeners for buttons
 

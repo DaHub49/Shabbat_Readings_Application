@@ -2,16 +2,18 @@ package za.co.howtogeek.shabbatreadingsapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
 import za.co.howtogeek.shabbatreadingsapplication.fragments.HomeFragment
-import za.co.howtogeek.shabbatreadingsapplication.databinding.ActivityMainBinding
+
+/**
+ * Author: Dylan Martin, George, South Africa
+ */
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var appBarConfiguration: AppBarConfiguration
+    //private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

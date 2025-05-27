@@ -1,9 +1,9 @@
-Bamidbar,Isaiah 55-60,Job 29-34,Acts 1-2,James,Isa.55.1#Job.29.1#Act.1.1#Jam.1.1,Isa_55_1#Job_8_1#Act_1_1#Jam_1_1
+Bamidbar,Isaiah 55-60,Job 29-34,Acts 1-2,James,Isa.55.1#Job.29.1#Act.1.1#Jas.1.1,Isa_55_1#Job_29_1#Act_1_1#Jam_1_1
 Nasso,Isaiah 61-66,Job 35-42,Acts 3-5,1 Peter,Isa.61.1#Job.35.1#Act.3.1#1Pe.1.1,Isa_61_1#Job_35_1#Act_3_1#1Pe_1_1
-Beha'alotcha,Jeremiah 1-6,Song of Solomon 1-4,Acts 6-8,2 Peter,Jer.1.1#Son.1.1#Act.6.1#2Pe.1.1,Jer_1_1#Son_1_1#Act_6_1#2Pe_1_1
-Shelach,Jeremiah 7-12,Song of Solomon 5-8,Acts 9-10,1 John 1-3,Jer.7.1#Son.5.1#Act.9.1#1Jo.1.1,Jer_7_1#Son_5_1#Act_9_1#1Jo_1_1
-Korach,Jeremiah 13-18,Ruth,Acts 11-12,1 John 4-5,Jer.13.1#Rut.1.1#Act.11.1#1Jo.4.1,Jer_13_1#Rut_1_1#Act_11_1#1Jo_4_1
-Chukat,Jeremiah 19-24,Lamentations,Acts 13-14,2 John,Jer.19.1#Lam.1.1#Act.13.1#2Jo.1.1,Jer_19_1#Lam_1_1#Act_13_1#2Jo_1_1
-Balak,Jeremiah 25-30,Ecclesiastes 1-6,Acts 15-16,3 John,Jer.25.1#Ecc.1.1#Act.15.1#3Jo.1.1,Jer_25_1#Ecc_1_1#Act_15_1#3Jo_1_1
+Beha'alotcha,Jeremiah 1-6,Song of Solomon 1-4,Acts 6-8,2 Peter,Jer.1.1#Sng.1.1#Act.6.1#2Pe.1.1,Jer_1_1#Son_1_1#Act_6_1#2Pe_1_1
+Shelach,Jeremiah 7-12,Song of Solomon 5-8,Acts 9-10,1 John 1-3,Jer.7.1#Sng.5.1#Act.9.1#1Jn.1.1,Jer_7_1#Son_5_1#Act_9_1#1Jo_1_1
+Korach,Jeremiah 13-18,Ruth,Acts 11-12,1 John 4-5,Jer.13.1#Rut.1.1#Act.11.1#1Jn.4.1,Jer_13_1#Rut_1_1#Act_11_1#1Jo_4_1
+Chukat,Jeremiah 19-24,Lamentations,Acts 13-14,2 John,Jer.19.1#Lam.1.1#Act.13.1#2Jn.1.1,Jer_19_1#Lam_1_1#Act_13_1#2Jo_1_1
+Balak,Jeremiah 25-30,Ecclesiastes 1-6,Acts 15-16,3 John,Jer.25.1#Ecc.1.1#Act.15.1#3Jn.1.1,Jer_25_1#Ecc_1_1#Act_15_1#3Jo_1_1
 Pinchas,Jeremiah 31-36,Ecclesiastes 7-12,Acts 17-18,Jude,Jer.31.1#Ecc.7.1#Act.17.1#Jud.1.1,Jer_31_1#Ecc_7_1#Act_17_1#Jud_1_1
 Matot-Masei,Jeremiah 37-42,Esther,Acts 19-20,Revelation 1-3,Jer.37.1#Est.1.1#Act.19.1#Rev.1.1,Jer_37_1#Est_1_1#Act_19_1#Rev_1_1

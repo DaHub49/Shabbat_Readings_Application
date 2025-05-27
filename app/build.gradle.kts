@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "za.co.howtogeek.shabbatreadingsapplication"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "za.co.howtogeek.shabbatreadingsapplication"
         minSdk = 22
-        targetSdk = 35
-        versionCode = 49
-        versionName = "Vayikra 5785"
+        targetSdk = 36
+        versionCode = 51
+        versionName = "Bamidbar 5785"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

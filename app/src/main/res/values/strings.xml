@@ -14,6 +14,17 @@
     <string name="title_activity_links">Links</string>
     <string name="title_fragment_bible_settings">Bible App Settings</string>
     <string name="mysword_bible_settings">MySword Bible Setup</string>
+    <string name="mysword_bible_explanation">
+        This guide will tell you how to download The Scriptures Bible translation, as well as the Hebrew interpolated Study Bible.\n
+        \n1. When opening for the first time, press OK and Allow Storage Permission to download your required modules.\n
+        2. Once the app is loaded, click the Settings cog in the middle of the shortcut bar at the bottom of the screen and then select \'Download Modules\'.\n
+        3. Click the \'BIBLE\' button on the top right and select \'English\' to display the different English translations available.\n
+        4. Scroll to and check \'TS2009 - The Scriptures 2009\', then press \'OK\'.\n
+        5. Select \'Bible\' again and select \'Interlinear\' and scroll to and check \'HiSB\: Hebrew interpolated Study Bible.\n
+        6. Then, click the \'FONT\' button on the \'Download Modules\' page and select \'Most Complete - with accented Greek, for TS2009\'.\n
+        7. Select the font of your choice, otherwise check the first option.\n
+        8. Select \'START DOWNLOADING\'.
+    </string>
 
     <string name="title_activity_feasts">Appointed Times</string>
     <string name="title_fragment_bookmarks">Bible Bookmark</string>
@@ -61,8 +72,6 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="youversion_baseurl">
-</string>
     <string name="bible_choice_string">Please choose a Bible above</string>
     <string name="tablet_edition">tablet edition</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -75,6 +84,20 @@
     <string name="bible_choice">YouVersion Bible Translation</string>
     <string name="english">English</string>
     <string name="youversion_bible_translation">YouVersion Bible Translation</string>
+
+
+    <string-array name="my_sword_setup_steps">
+        <item>This guide will tell you how to download The Scriptures Bible translation, as well as the Hebrew interpolated Study Bible.</item>
+        <item>When opening for the first time, press OK and Allow Storage Permission to download your required modules.</item>
+        <item>Once the app is loaded, click the Settings cog in the middle of the shortcut bar at the bottom of the screen and then select \'Download Modules\'.</item>
+        <item>Click the \'BIBLE\' button on the top right and select \'English\' to display the different English translations available.</item>
+        <item>Scroll to and check \'TS2009 - The Scriptures 2009\', then press \'OK\'</item>
+        <item>Select \'Bible\' again and select \'Interlinear\' and scroll to and check \'HiSB\: Hebrew interpolated Study Bible.</item>
+        <item>Then, click the \'FONT\' button on the \'Download Modules\' page and select \'Most Complete - with accented Greek, for TS2009\'</item>
+        <item>Select the font of yo0ur choice, otherwise check the first option.</item>
+        <item>Select \'START DOWNLOADING\'</item>
+
+    </string-array>
 
     <string-array name="youversion_ts2009_translations">
         <item>English TS2009</item>
@@ -208,6 +231,7 @@
     <string name="messianic_bereisheet_readings">Messianic Bereisheet Readings</string>
     <string name="shemot_torah_readings">Shemot Readings</string>
     <string name="vayikra_torah_readings">Vayikra Readings</string>
+    <string name="bamidbar_torah_readings">Bamidbar Readings</string>
     <string name="links">Links:</string>
     <string name="gregorian_date">Gregorian Date:</string>
     <string name="biblical_date">Biblical Date:</string>
