@@ -7,7 +7,15 @@ import android.view.MenuItem
 import za.co.howtogeek.shabbatreadingsapplication.fragments.HomeFragment
 
 /**
- * Author: Dylan Martin, George, South Africa
+ * Author: Dylan Martin, South Africa
+ *
+ * Current update start date: 25 July 2025.
+ *
+ * I am busy with an @Compose version with a ViewModel, of Shabbat Readings, but it won't be ready in time for this release.
+ *
+ * I've just altered the text files to contain the readings relative to this time, as well as updating the Button on the fragment_home.xml file.
+ *
+ * I will generate the relative Dark theme with the new app.
  */
 
 class MainActivity : AppCompatActivity() {
@@ -28,22 +36,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
 
-        /*binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-         */
-
-        /*val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
-        }
-         */
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,10 +54,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /*override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
-     */
 }

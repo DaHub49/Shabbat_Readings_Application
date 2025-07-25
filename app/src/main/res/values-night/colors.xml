@@ -18,4 +18,10 @@
     <color name="my_light_on_primary">#000000</color>
     <color name="background">#121212</color> <!-- Common dark theme background -->
     <color name="textColor">#000000</color>
+
+    <!-- res/values/colors.xml (For Light Theme) -->
+        <color name="my_app_background">#F5F5F5</color> <!-- Very light gray for light theme -->
+        <color name="my_app_surface">#FFFFFF</color>   <!-- White for cards/surfaces -->
+        <color name="my_app_text_primary">#212121</color>
+        <color name="my_app_gray_element_background">#E0E0E0</color> <!-- A distinct gray for specific elements -->
 </resources>

@@ -58,7 +58,7 @@ Example String array:
  * 4. https://bible.com/bible/153/GEN.1.SAB
  */
 //private val TAG = "fragments -> ShabbatDetailFragment ->"
-private val FILENAME = "bamidbar_5785.txt"
+private val FILENAME = "messianic_devarim_5785.txt"
 private val PREFERENCES = "preferences"
 private val PARASHA_POSITION = "parashaPosition"
 private val TRANSLATIONINDEX = "translationIndex"
